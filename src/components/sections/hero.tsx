@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
 import { ArrowDown } from "lucide-react";
+import Link from "next/link";
+
 import { EASE, useAnimationsDisabled } from "@/components/ui/reveal";
 
 const NAME = "Raka Pratama";
 
-export default function Hero() {
+export const Hero = () => {
   const disabled = useAnimationsDisabled();
   const { scrollY } = useScroll();
 
@@ -17,48 +18,48 @@ export default function Hero() {
 
   return (
     <section
+      className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden"
       id="top"
-      className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden"
     >
       {/* Backdrop — extended above so parallax never reveals an edge */}
       <motion.div
-        className="absolute left-0 right-0 -top-72 h-[calc(100%+18rem)] bg-grid"
-        style={{ y: gridY }}
         aria-hidden
+        className="bg-grid absolute -top-72 right-0 left-0 h-[calc(100%+18rem)]"
+        style={{ y: gridY }}
       />
       <motion.div
-        className="absolute left-0 right-0 -top-72 h-[calc(100%+18rem)] bg-glow"
-        style={{ y: glowY }}
         aria-hidden
+        className="bg-glow absolute -top-72 right-0 left-0 h-[calc(100%+18rem)]"
+        style={{ y: glowY }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10 py-24">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-24 sm:px-10">
         {/* Eyebrow */}
         <motion.p
-          initial={disabled ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
-          className="font-mono text-xs uppercase tracking-[0.28em] text-accent mb-6"
+          className="text-accent mb-6 font-mono text-xs tracking-[0.28em] uppercase"
+          initial={disabled ? false : { opacity: 0 }}
+          transition={{ delay: 0.1, duration: 0.5, ease: EASE }}
         >
           {"// lead frontend engineer — bandung, id"}
         </motion.p>
 
         {/* Name: character-by-character reveal */}
         <h1
-          className="font-sans font-extrabold text-ink tracking-tight text-4xl sm:text-6xl md:text-7xl leading-[0.98]"
           aria-label={NAME}
+          className="text-ink font-sans text-4xl leading-[0.98] font-extrabold tracking-tight sm:text-6xl md:text-7xl"
         >
           {NAME.split("").map((char, i) => (
             <motion.span
-              key={`${char}-${i}`}
-              className="inline-block"
+              animate={{ opacity: 1, rotateX: 0, y: 0 }}
               aria-hidden
-              initial={disabled ? false : { opacity: 0, y: 34, rotateX: 45 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              className="inline-block"
+              initial={disabled ? false : { opacity: 0, rotateX: 45, y: 34 }}
+              key={`${char}-${i}`}
               transition={{
+                delay: 0.25 + i * 0.03,
                 duration: 0.6,
                 ease: EASE,
-                delay: 0.25 + i * 0.03,
               }}
             >
               {char === " " ? "\u00A0" : char}
@@ -68,43 +69,43 @@ export default function Hero() {
 
         {/* Thesis line */}
         <motion.p
-          initial={disabled ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 1.1 }}
-          className="mt-6 font-serif italic text-xl md:text-2xl text-accent"
+          className="text-accent mt-6 font-serif text-xl italic md:text-2xl"
+          initial={disabled ? false : { opacity: 0, y: 18 }}
+          transition={{ delay: 1.1, duration: 0.6, ease: EASE }}
         >
           Frontend systems, built to scale.
         </motion.p>
 
         {/* Intro */}
         <motion.p
-          initial={disabled ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 1.25 }}
-          className="mt-6 max-w-xl text-body leading-relaxed"
+          className="text-body mt-6 max-w-xl leading-relaxed"
+          initial={disabled ? false : { opacity: 0, y: 18 }}
+          transition={{ delay: 1.25, duration: 0.6, ease: EASE }}
         >
-          I&apos;m Raka — I architect design systems, lead frontend
-          teams, and ship data-heavy product UI. Seven years of turning
-          frontend chaos into order at scale.
+          I&apos;m Tama — I architect design systems, lead frontend teams, and
+          ship data-heavy product UI. Seven years of turning frontend chaos into
+          order at scale.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
-          initial={disabled ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 1.4 }}
           className="mt-10 flex flex-wrap items-center gap-4"
+          initial={disabled ? false : { opacity: 0, y: 18 }}
+          transition={{ delay: 1.4, duration: 0.6, ease: EASE }}
         >
           <Link
+            className="bg-accent text-accent-ink inline-flex items-center gap-2 rounded-full px-6 py-3 font-mono text-sm font-semibold tracking-wider uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-95"
             href="#case-studies"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm font-semibold uppercase tracking-wider text-accent-ink transition-transform duration-200 hover:scale-[1.03] active:scale-95"
           >
             View case studies
             <ArrowDown size={15} />
           </Link>
           <Link
+            className="border-line text-ink hover:border-accent hover:text-accent inline-flex items-center gap-2 rounded-full border px-6 py-3 font-mono text-sm font-semibold tracking-wider uppercase transition-colors duration-200"
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 font-mono text-sm font-semibold uppercase tracking-wider text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
           >
             Get in touch
           </Link>
@@ -113,22 +114,22 @@ export default function Hero() {
 
       {/* Scroll hint */}
       <motion.div
-        initial={disabled ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted"
+        className="text-muted absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
+        initial={disabled ? false : { opacity: 0 }}
+        transition={{ delay: 1.8, duration: 0.6 }}
       >
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
+        <span className="font-mono text-[10px] tracking-[0.3em] uppercase">
           scroll
         </span>
         <motion.span
           animate={disabled ? undefined : { y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="h-8 w-px bg-line relative overflow-hidden"
+          className="bg-line relative h-8 w-px overflow-hidden"
+          transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
         >
-          <span className="absolute top-0 left-0 h-3 w-px bg-accent" />
+          <span className="bg-accent absolute top-0 left-0 h-3 w-px" />
         </motion.span>
       </motion.div>
     </section>
   );
-}
+};

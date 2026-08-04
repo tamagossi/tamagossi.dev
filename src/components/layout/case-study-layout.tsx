@@ -1,55 +1,56 @@
-import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import Header from "@/components/layout/header";
-import ArticleProgress from "@/components/layout/article-progress";
+import Link from "next/link";
 
-export default function CaseStudyLayout({
+import { ArticleProgress } from "@/components/layout/article-progress";
+import { Header } from "@/components/layout/header";
+
+export const CaseStudyLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   return (
-    <div className="pt-16 min-h-screen">
+    <div className="min-h-screen pt-16">
       <Header />
       <ArticleProgress />
 
-      <main className="mx-auto max-w-3xl px-6 sm:px-10 py-16 md:py-24">
+      <main className="mx-auto max-w-3xl px-6 py-16 sm:px-10 md:py-24">
         <Link
+          className="group text-muted hover:text-accent mb-12 inline-flex items-center gap-2 font-mono text-sm transition-colors"
           href="/#case-studies"
-          className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors mb-12"
         >
           <ArrowLeft
-            size={15}
             className="transition-transform duration-200 group-hover:-translate-x-1"
+            size={15}
           />
           Back to case studies
         </Link>
 
         <article className="article">{children}</article>
 
-        <div className="mt-20 border-t border-line/70 pt-8 flex items-center justify-between">
+        <div className="border-line/70 mt-20 flex items-center justify-between border-t pt-8">
           <Link
+            className="group text-accent inline-flex items-center gap-2 font-mono text-sm"
             href="/#case-studies"
-            className="group inline-flex items-center gap-2 font-mono text-sm text-accent"
           >
             <ArrowLeft
-              size={15}
               className="transition-transform duration-200 group-hover:-translate-x-1"
+              size={15}
             />
             More case studies
           </Link>
           <Link
+            className="group text-muted hover:text-accent inline-flex items-center gap-2 font-mono text-sm transition-colors"
             href="/#contact"
-            className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors"
           >
             Get in touch
             <ArrowUpRight
-              size={15}
               className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              size={15}
             />
           </Link>
         </div>
       </main>
     </div>
   );
-}
+};

@@ -9,24 +9,27 @@ drop the files in and wire them up.
 - [ ] **Personal photo** — portrait for the hero or the About section.
       Recommended: square or 4:5 crop, shot on a clean/dark background
       that matches the palette, ~1200px on the long edge.
-- [ ] *(Optional)* Abstract/generative hero visual if no photo is used.
+- [ ] _(Optional)_ Abstract/generative hero visual if no photo is used.
 
 ## Case Studies
 
 ### `/case-studies/ventura-ui`
+
 - [ ] Screenshots of the Ventura UI component library (buttons, tables, forms).
 - [ ] Screenshot of the design-token documentation / Storybook page.
 - [ ] Before/after of component adoption across the 3 squads.
 
 ### `/case-studies/nextjs-migration`
+
 - [ ] Build-time comparison chart (before 8 min → after 3 min).
 - [ ] Lighthouse / performance score screenshots.
 - [ ] Architecture diagram: before vs after.
 
 ### `/case-studies/team-restructuring`
+
 - [ ] Metrics dashboard screenshot (bug rate 100% → 70%, coverage).
 - [ ] Code review / testing process documentation screenshot.
-- [ ] *(Optional)* Team photo or org chart — redact names if needed.
+- [ ] _(Optional)_ Team photo or org chart — redact names if needed.
 
 ## Demo
 
@@ -36,4 +39,4 @@ drop the files in and wire them up.
 
 - [ ] **Open Graph / social preview image** (1200×630) for link sharing.
 - [ ] **Favicon** update to match the new brand (current: default Next.js).
-- [ ] *(Optional)* `apple-touch-icon` + favicon variants.
+- [ ] _(Optional)_ `apple-touch-icon` + favicon variants.

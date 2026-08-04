@@ -1,52 +1,52 @@
 "use client";
 
-import { FadeIn, WordReveal } from "@/components/ui/reveal";
 import {
+  FileTextIcon,
   GitHubIcon,
   LinkedInIcon,
   MailIcon,
-  FileTextIcon,
 } from "@/components/ui/icons";
+import { FadeIn, WordReveal } from "@/components/ui/reveal";
 
 const LINKS = [
   {
-    label: "GitHub",
     href: "https://github.com/tamagossi",
     Icon: GitHubIcon,
+    label: "GitHub",
   },
   {
-    label: "LinkedIn",
     href: "https://linkedin.com/in/tamagossi",
     Icon: LinkedInIcon,
+    label: "LinkedIn",
   },
   {
-    label: "Email",
     href: "mailto:mgf.prauliyatama@gmail.com",
     Icon: MailIcon,
+    label: "Email",
   },
   {
-    label: "Résumé",
     href: "/resume.pdf",
     Icon: FileTextIcon,
+    label: "Résumé",
   },
 ];
 
-export default function Contact() {
+export const Contact = () => {
   return (
-    <section id="contact" className="py-28 md:py-40">
+    <section className="py-28 md:py-40" id="contact">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeIn>
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent mb-4">
+          <p className="text-accent mb-4 font-mono text-xs tracking-[0.28em] uppercase">
             {"// "}contact
           </p>
           <WordReveal
             as="h2"
+            className="text-ink max-w-2xl font-sans text-4xl leading-tight font-bold tracking-tight md:text-5xl"
             text="Let's build something that scales."
-            className="font-sans text-4xl md:text-5xl font-bold text-ink tracking-tight leading-tight max-w-2xl"
           />
         </FadeIn>
 
-        <FadeIn delay={0.15} className="mt-10 max-w-xl">
+        <FadeIn className="mt-10 max-w-xl" delay={0.15}>
           <p className="text-body leading-relaxed">
             I&apos;m open to lead frontend roles, design-system work, and
             consulting on scaling product UI. If you&apos;re building something
@@ -54,25 +54,27 @@ export default function Contact() {
           </p>
 
           <a
+            className="text-accent decoration-accent/40 hover:decoration-accent mt-8 inline-block font-mono text-xl font-semibold underline underline-offset-8 transition-colors md:text-2xl"
             href="mailto:mgf.prauliyatama@gmail.com"
-            className="mt-8 inline-block font-mono text-xl md:text-2xl font-semibold text-accent underline underline-offset-8 decoration-accent/40 hover:decoration-accent transition-colors"
           >
             mgf.prauliyatama@gmail.com
           </a>
         </FadeIn>
 
-        <FadeIn delay={0.25} className="mt-12">
+        <FadeIn className="mt-12" delay={0.25}>
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-4">
-            {LINKS.map(({ label, href, Icon }) => (
+            {LINKS.map(({ href, Icon, label }) => (
               <li key={label}>
                 <a
+                  className="group text-muted hover:text-accent inline-flex items-center gap-2 font-mono text-sm transition-colors"
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors"
+                  rel={
+                    href.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
                 >
                   <Icon size={17} />
-                  <span className="group-hover:underline underline-offset-4">
+                  <span className="underline-offset-4 group-hover:underline">
                     {label}
                   </span>
                 </a>
@@ -80,7 +82,7 @@ export default function Contact() {
             ))}
           </ul>
 
-          <p className="mt-10 border-t border-line/70 pt-6 font-mono text-xs text-faint max-w-xl">
+          <p className="border-line/70 text-faint mt-10 max-w-xl border-t pt-6 font-mono text-xs">
             GMT+7 (Bandung, Indonesia) — experienced in async collaboration
             across 8–12h timezone gaps.
           </p>
@@ -88,4 +90,4 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+};

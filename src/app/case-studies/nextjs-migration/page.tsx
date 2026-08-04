@@ -1,25 +1,20 @@
-import CaseStudyLayout from "@/components/layout/case-study-layout";
 import type { Metadata } from "next";
 
+import { CaseStudyLayout } from "@/components/layout/case-study-layout";
+
 export const metadata: Metadata = {
-  title: "Next.js 10 → 11 Migration — Raka Pratama",
   description:
     "Refactored legacy code and cut build time by 60% to unblock framework upgrades at Staffinc.",
+  title: "Next.js 10 → 11 Migration — Raka Pratama",
 };
 
 export default function NextjsMigrationPage() {
   return (
     <CaseStudyLayout>
-      <h1 className="mb-2">
-        Next.js 10 → 11 Migration & Build Optimization
-      </h1>
-      <p className="mb-8">
-        Lead Engineer · Staffinc · 2024
-      </p>
+      <h1 className="mb-2">Next.js 10 → 11 Migration & Build Optimization</h1>
+      <p className="mb-8">Lead Engineer · Staffinc · 2024</p>
 
-      <h2 className="mt-10">
-        Problem
-      </h2>
+      <h2 className="mt-10">Problem</h2>
       <p>
         Staffinc&apos;s main web portal was stuck on Next.js 10 — two major
         versions behind. CI builds took 15+ minutes, slowing down every
@@ -30,9 +25,7 @@ export default function NextjsMigrationPage() {
         methods — made any version bump risky.
       </p>
 
-      <h2 className="mt-10">
-        Approach & Decisions
-      </h2>
+      <h2 className="mt-10">Approach & Decisions</h2>
       <p>
         I chose an incremental migration strategy rather than a big-bang
         rewrite:
@@ -62,12 +55,8 @@ export default function NextjsMigrationPage() {
         </li>
       </ul>
 
-      <h2 className="mt-10">
-        Implementation
-      </h2>
-      <p>
-        The migration took 3 weeks end-to-end, shipped in 4 PRs:
-      </p>
+      <h2 className="mt-10">Implementation</h2>
+      <p>The migration took 3 weeks end-to-end, shipped in 4 PRs:</p>
       <ol>
         <li>TypeScript strict mode + class→functional refactors (week 1)</li>
         <li>Next.js 10→11 upgrade + Webpack 5 migration (week 2)</li>
@@ -80,26 +69,30 @@ export default function NextjsMigrationPage() {
         mentoring opportunity.
       </p>
 
-      <h2 className="mt-10">
-        Result
-      </h2>
+      <h2 className="mt-10">Result</h2>
       <ul>
         <li>Build time reduced by 60% — from 15+ minutes to 6 minutes</li>
-        <li>Faster CI feedback loop — developers got results in under 10 min instead of 20+</li>
-        <li>Unblocked future framework upgrades (Next.js 11 → 12 → 13+ path is now clear)</li>
-        <li>3 junior engineers leveled up through paired refactoring sessions</li>
+        <li>
+          Faster CI feedback loop — developers got results in under 10 min
+          instead of 20+
+        </li>
+        <li>
+          Unblocked future framework upgrades (Next.js 11 → 12 → 13+ path is now
+          clear)
+        </li>
+        <li>
+          3 junior engineers leveled up through paired refactoring sessions
+        </li>
       </ul>
 
-      <h2 className="mt-10">
-        Lessons
-      </h2>
+      <h2 className="mt-10">Lessons</h2>
       <p>
         Incremental migration over big-bang rewrite was the right call. We
         shipped value at each step — TypeScript strict mode alone caught 12 bugs
-        before the version bump even started. If I were to do it again,
-        I&apos;d invest more in automated regression testing before the
-        migration. We relied too heavily on manual QA, which slowed down the
-        final verification.
+        before the version bump even started. If I were to do it again, I&apos;d
+        invest more in automated regression testing before the migration. We
+        relied too heavily on manual QA, which slowed down the final
+        verification.
       </p>
     </CaseStudyLayout>
   );

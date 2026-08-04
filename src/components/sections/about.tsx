@@ -1,49 +1,57 @@
 "use client";
 
-import SectionHeading from "@/components/ui/section-heading";
 import { FadeIn, SlideIn } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const TOKENS = [
-  { key: "--color-base", value: "#0c0a09", swatch: "bg-base border border-line" },
-  { key: "--color-surface", value: "#1c1917", swatch: "bg-surface border border-line" },
-  { key: "--color-accent", value: "#fbbf24", swatch: "bg-accent" },
+  {
+    key: "--color-base",
+    swatch: "bg-base border border-line",
+    value: "#0c0a09",
+  },
+  {
+    key: "--color-surface",
+    swatch: "bg-surface border border-line",
+    value: "#1c1917",
+  },
+  { key: "--color-accent", swatch: "bg-accent", value: "#fbbf24" },
   { key: "--font-display", value: "Syne" },
   { key: "--font-body", value: "Source Serif 4" },
   { key: "--font-mono", value: "JetBrains Mono" },
 ];
 
 const STATS = [
-  { value: "7+", label: "years shipping product UI" },
-  { value: "2", label: "FE engineers led as Chapter Lead" },
-  { value: "40+", label: "design system components" },
-  { value: "60%", label: "faster CI builds" },
+  { label: "years shipping product UI", value: "7+" },
+  { label: "FE engineers led as Chapter Lead", value: "2" },
+  { label: "design system components", value: "40+" },
+  { label: "faster CI builds", value: "60%" },
 ];
 
-export default function About() {
+export const About = () => {
   return (
-    <section id="about" className="py-28 md:py-36">
+    <section className="py-28 md:py-36" id="about">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <SectionHeading eyebrow="whoami" title="About me" />
 
-        <div className="grid gap-12 md:grid-cols-[1fr_320px] md:gap-16 items-start">
+        <div className="grid items-start gap-12 md:grid-cols-[1fr_320px] md:gap-16">
           {/* Bio */}
-          <SlideIn className="space-y-5 text-body leading-relaxed">
+          <SlideIn className="text-body space-y-5 leading-relaxed">
             <p>
               I&apos;m a Lead Frontend Engineer based in Bandung, Indonesia,
               with 7+ years of experience building design systems, leading
               frontend teams, and shipping data-heavy product UI at scale.
               Currently Chapter Lead at{" "}
               <a
+                className="text-accent underline-offset-4 hover:underline"
                 href="https://staffinc.co"
-                target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:underline underline-offset-4"
+                target="_blank"
               >
                 Staffinc
               </a>
               , where I architect the Ventura UI design system, lead 2 FE
-              engineers, coordinate cross-functional squads, and drive frontend standards
-              across the organization.
+              engineers, coordinate cross-functional squads, and drive frontend
+              standards across the organization.
             </p>
             <p>
               I thrive at the intersection of engineering leadership and
@@ -66,28 +74,28 @@ export default function About() {
           </SlideIn>
 
           {/* Token card — the site's own design system, shown as data */}
-          <FadeIn delay={0.15} className="md:sticky md:top-24">
-            <div className="rounded-2xl bg-surface border border-line p-6 font-mono text-xs">
-              <div className="flex items-center justify-between mb-5">
+          <FadeIn className="md:sticky md:top-24" delay={0.15}>
+            <div className="bg-surface border-line rounded-2xl border p-6 font-mono text-xs">
+              <div className="mb-5 flex items-center justify-between">
                 <p className="text-muted">tokens.json</p>
-                <span className="flex gap-1.5" aria-hidden>
-                  <span className="h-2 w-2 rounded-full bg-elevated" />
-                  <span className="h-2 w-2 rounded-full bg-elevated" />
-                  <span className="h-2 w-2 rounded-full bg-accent" />
+                <span aria-hidden className="flex gap-1.5">
+                  <span className="bg-elevated h-2 w-2 rounded-full" />
+                  <span className="bg-elevated h-2 w-2 rounded-full" />
+                  <span className="bg-accent h-2 w-2 rounded-full" />
                 </span>
               </div>
               <ul className="space-y-3">
                 {TOKENS.map((token) => (
                   <li
-                    key={token.key}
                     className="flex items-center justify-between gap-4"
+                    key={token.key}
                   >
                     <span className="text-faint truncate">{token.key}</span>
-                    <span className="flex items-center gap-2 text-muted">
+                    <span className="text-muted flex items-center gap-2">
                       {token.swatch ? (
                         <span
-                          className={`h-3 w-3 rounded ${token.swatch}`}
                           aria-hidden
+                          className={`h-3 w-3 rounded ${token.swatch}`}
                         />
                       ) : null}
                       <span className="text-body">{token.value}</span>
@@ -95,7 +103,7 @@ export default function About() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 pt-5 border-t border-line">
+              <div className="border-line mt-5 border-t pt-5">
                 <p className="text-faint">
                   This site&apos;s design system — every value on this page.
                 </p>
@@ -105,18 +113,15 @@ export default function About() {
         </div>
 
         {/* Stats */}
-        <FadeIn delay={0.1} className="mt-16 md:mt-20">
-          <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line/70 rounded-2xl overflow-hidden border border-line">
+        <FadeIn className="mt-16 md:mt-20" delay={0.1}>
+          <dl className="bg-line/70 border-line grid grid-cols-2 gap-px overflow-hidden rounded-2xl border md:grid-cols-4">
             {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-surface px-6 py-7"
-              >
+              <div className="bg-surface px-6 py-7" key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-sans text-3xl md:text-4xl font-bold text-accent">
+                <dd className="text-accent font-sans text-3xl font-bold md:text-4xl">
                   {stat.value}
                 </dd>
-                <p className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
+                <p className="text-muted mt-2 font-mono text-xs tracking-wider uppercase">
                   {stat.label}
                 </p>
               </div>
@@ -126,4 +131,4 @@ export default function About() {
       </div>
     </section>
   );
-}
+};

@@ -1,10 +1,10 @@
-import Header from "@/components/layout/header";
-import Hero from "@/components/sections/hero";
-import About from "@/components/sections/about";
-import Experience from "@/components/sections/experience";
-import CaseStudies from "@/components/sections/case-studies";
-import Demo from "@/components/sections/demo";
-import Contact from "@/components/sections/contact";
+import { Header } from "@/components/layout/header";
+import { About } from "@/components/sections/about";
+import { CaseStudies } from "@/components/sections/case-studies";
+import { Contact } from "@/components/sections/contact";
+import { Demo } from "@/components/sections/demo";
+import { Experience } from "@/components/sections/experience";
+import { Hero } from "@/components/sections/hero";
 
 export default function Home() {
   return (
@@ -20,12 +20,12 @@ export default function Home() {
         <Contact />
       </main>
 
-      <footer className="border-t border-line/70 py-10">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="font-mono text-xs text-faint">
+      <footer className="border-line/70 border-t py-10">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-6 sm:flex-row sm:items-center sm:px-10">
+          <p className="text-faint font-mono text-xs">
             Designed &amp; built by Raka Pratama
           </p>
-          <p className="font-mono text-xs text-faint">
+          <p className="text-faint font-mono text-xs">
             Next.js · Tailwind CSS · Framer Motion · Vercel
           </p>
         </div>

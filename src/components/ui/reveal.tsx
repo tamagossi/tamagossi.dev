@@ -13,8 +13,8 @@ interface FadeInProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  y?: number;
   once?: boolean;
+  y?: number;
 }
 
 /** Fade-up reveal on scroll into view. */
@@ -22,17 +22,17 @@ export function FadeIn({
   children,
   className,
   delay = 0,
-  y = 24,
   once = true,
+  y = 24,
 }: FadeInProps) {
   const disabled = useAnimationsDisabled();
   return (
     <motion.div
       className={className}
       initial={disabled ? false : { opacity: 0, y }}
+      transition={{ delay, duration: 0.7, ease: EASE }}
+      viewport={{ margin: "-80px", once }}
       whileInView={disabled ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: EASE, delay }}
     >
       {children}
     </motion.div>
@@ -58,9 +58,9 @@ export function SlideIn({
     <motion.div
       className={className}
       initial={disabled ? false : { opacity: 0, x }}
+      transition={{ delay, duration: 0.9, ease: EASE }}
+      viewport={{ margin: "-80px", once: true }}
       whileInView={disabled ? undefined : { opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
     >
       {children}
     </motion.div>
@@ -74,19 +74,15 @@ interface ScaleInProps {
 }
 
 /** Subtle scale-in reveal. */
-export function ScaleIn({
-  children,
-  className,
-  delay = 0,
-}: ScaleInProps) {
+export function ScaleIn({ children, className, delay = 0 }: ScaleInProps) {
   const disabled = useAnimationsDisabled();
   return (
     <motion.div
       className={className}
       initial={disabled ? false : { opacity: 0, scale: 0.97 }}
+      transition={{ delay, duration: 0.8, ease: EASE }}
+      viewport={{ margin: "-80px", once: true }}
       whileInView={disabled ? undefined : { opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, ease: EASE, delay }}
     >
       {children}
     </motion.div>
@@ -94,35 +90,35 @@ export function ScaleIn({
 }
 
 interface WordRevealProps {
-  text: string;
-  className?: string;
   as?: keyof React.JSX.IntrinsicElements;
+  className?: string;
   delay?: number;
+  text: string;
 }
 
 /** Word-by-word mask reveal, staggered left to right. */
 export function WordReveal({
-  text,
-  className,
   as: Tag = "h2",
+  className,
   delay = 0,
+  text,
 }: WordRevealProps) {
   const disabled = useAnimationsDisabled();
   const words = text.split(" ");
   return (
-    <Tag className={className} aria-label={text}>
+    <Tag aria-label={text} className={className}>
       {words.map((word, i) => (
         <span
-          key={`${word}-${i}`}
-          className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"
           aria-hidden
+          className="-mb-[0.08em] inline-block overflow-hidden pb-[0.08em] align-bottom"
+          key={`${word}-${i}`}
         >
           <motion.span
             className="inline-block"
             initial={disabled ? false : { y: "115%" }}
+            transition={{ delay: delay + i * 0.05, duration: 0.65, ease: EASE }}
+            viewport={{ margin: "-60px", once: true }}
             whileInView={disabled ? undefined : { y: "0%" }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.65, ease: EASE, delay: delay + i * 0.05 }}
           >
             {word}
             {"\u00A0"}

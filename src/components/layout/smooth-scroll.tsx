@@ -1,22 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
+
 import Lenis from "lenis";
 
 /** Buttery smooth scrolling — the foundation for parallax + asymmetric motion. */
-export default function SmoothScroll({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1,
-      autoRaf: true,
       anchors: true,
+      autoRaf: true,
+      lerp: 0.1,
     });
     return () => lenis.destroy();
   }, []);
 
   return <>{children}</>;
-}
+};

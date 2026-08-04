@@ -1,29 +1,31 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  Search,
   ChevronDown,
-  ChevronUp,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   RefreshCw,
+  Search,
 } from "lucide-react";
-import Header from "@/components/layout/header";
+import Link from "next/link";
+
+import { Header } from "@/components/layout/header";
 import { mockWorkers, type Worker } from "@/lib/mock-data";
 
 type Status = Worker["status"];
 type SortField = keyof Worker;
 type SortDir = "asc" | "desc";
 
-const STATUS_OPTIONS: { value: Status | ""; label: string }[] = [
-  { value: "", label: "All" },
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-  { value: "on_leave", label: "On Leave" },
+const STATUS_OPTIONS: { label: string; value: "" | Status }[] = [
+  { label: "All", value: "" },
+  { label: "Active", value: "active" },
+  { label: "Inactive", value: "inactive" },
+  { label: "On Leave", value: "on_leave" },
 ];
 
 const DEPARTMENTS = [
@@ -34,14 +36,14 @@ const PAGE_SIZES = [10, 25, 50];
 
 // Simulate API call with delay
 function fetchWorkers(params: {
-  search: string;
-  status: Status | "";
   department: string;
-  sortField: SortField;
-  sortDir: SortDir;
   page: number;
   pageSize: number;
-}): Promise<{ workers: Worker[]; total: number }> {
+  search: string;
+  sortDir: SortDir;
+  sortField: SortField;
+  status: "" | Status;
+}): Promise<{ total: number; workers: Worker[] }> {
   return new Promise((resolve, reject) => {
     // Simulate 300ms latency
     setTimeout(() => {
@@ -58,7 +60,7 @@ function fetchWorkers(params: {
         filtered = filtered.filter(
           (w) =>
             w.name.toLowerCase().includes(q) ||
-            w.role.toLowerCase().includes(q)
+            w.role.toLowerCase().includes(q),
         );
       }
 
@@ -88,32 +90,32 @@ function fetchWorkers(params: {
       const start = (params.page - 1) * params.pageSize;
       const workers = filtered.slice(start, start + params.pageSize);
 
-      resolve({ workers, total });
+      resolve({ total, workers });
     }, 300);
   });
 }
 
 function SortIcon({
-  field,
   activeField,
   dir,
+  field,
 }: {
-  field: SortField;
   activeField: SortField;
   dir: SortDir;
+  field: SortField;
 }) {
   if (activeField !== field) return null;
   return dir === "asc" ? (
-    <ChevronUp size={14} className="inline ml-1" />
+    <ChevronUp className="ml-1 inline" size={14} />
   ) : (
-    <ChevronDown size={14} className="inline ml-1" />
+    <ChevronDown className="ml-1 inline" size={14} />
   );
 }
 
 export default function DashboardPage() {
   // Filter state
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<Status | "">("");
+  const [status, setStatus] = useState<"" | Status>("");
   const [department, setDepartment] = useState("All");
   const [sortField, setSortField] = useState<SortField>("name");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -124,19 +126,19 @@ export default function DashboardPage() {
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<null | string>(null);
 
   const loadData = useCallback(() => {
     setLoading(true);
     setError(null);
     fetchWorkers({
-      search,
-      status,
       department,
-      sortField,
-      sortDir,
       page,
       pageSize,
+      search,
+      sortDir,
+      sortField,
+      status,
     })
       .then((data) => {
         setWorkers(data.workers);
@@ -163,7 +165,7 @@ export default function DashboardPage() {
 
   const totalPages = Math.ceil(total / pageSize);
 
-  const handleSort = (field: SortField) => {
+  const sortBy = (field: SortField) => {
     if (sortField === field) {
       setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     } else {
@@ -181,7 +183,7 @@ export default function DashboardPage() {
     };
     return (
       <span
-        className={`px-2 py-0.5 text-xs rounded-full border font-mono uppercase tracking-wide ${colors[s]}`}
+        className={`rounded-full border px-2 py-0.5 font-mono text-xs tracking-wide uppercase ${colors[s]}`}
       >
         {s.replace("_", " ")}
       </span>
@@ -192,25 +194,25 @@ export default function DashboardPage() {
     "bg-surface border border-line rounded-lg text-sm text-body placeholder:text-faint focus:outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/30 transition-colors";
 
   return (
-    <div className="pt-16 min-h-screen">
+    <div className="min-h-screen pt-16">
       <Header />
 
-      <main className="mx-auto max-w-6xl px-6 sm:px-10 py-14 md:py-20">
+      <main className="mx-auto max-w-6xl px-6 py-14 sm:px-10 md:py-20">
         <Link
+          className="group text-muted hover:text-accent mb-10 inline-flex items-center gap-2 font-mono text-sm transition-colors"
           href="/#demo"
-          className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors mb-10"
         >
           <ArrowLeft
-            size={15}
             className="transition-transform duration-200 group-hover:-translate-x-1"
+            size={15}
           />
           Back home
         </Link>
 
-        <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent mb-4">
+        <p className="text-accent mb-4 font-mono text-xs tracking-[0.28em] uppercase">
           {"// "}live proof
         </p>
-        <h1 className="font-sans text-3xl md:text-4xl font-bold text-ink tracking-tight">
+        <h1 className="text-ink font-sans text-3xl font-bold tracking-tight md:text-4xl">
           Data-Heavy Dashboard
         </h1>
         <p className="text-muted mt-3 mb-10 max-w-xl">
@@ -219,30 +221,30 @@ export default function DashboardPage() {
         </p>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
             <Search
+              className="text-faint absolute top-1/2 left-3 -translate-y-1/2"
               size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-faint"
             />
             <input
-              type="text"
+              className={`w-full py-2 pr-4 pl-10 ${inputClass}`}
               placeholder="Search by name or role..."
+              type="text"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className={`w-full pl-10 pr-4 py-2 ${inputClass}`}
             />
           </div>
           <select
+            className={`px-3 py-2 ${inputClass}`}
             value={status}
             onChange={(e) => {
-              setStatus(e.target.value as Status | "");
+              setStatus(e.target.value as "" | Status);
               setPage(1);
             }}
-            className={`px-3 py-2 ${inputClass}`}
           >
             {STATUS_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -251,12 +253,12 @@ export default function DashboardPage() {
             ))}
           </select>
           <select
+            className={`px-3 py-2 ${inputClass}`}
             value={department}
             onChange={(e) => {
               setDepartment(e.target.value);
               setPage(1);
             }}
-            className={`px-3 py-2 ${inputClass}`}
           >
             {DEPARTMENTS.map((dept) => (
               <option key={dept} value={dept}>
@@ -267,14 +269,14 @@ export default function DashboardPage() {
         </div>
 
         {/* Content */}
-        <div className="bg-surface border border-line rounded-2xl overflow-hidden">
+        <div className="bg-surface border-line overflow-hidden rounded-2xl border">
           {/* Loading state */}
           {loading && (
-            <div className="p-8 space-y-3">
+            <div className="space-y-3 p-8">
               {Array.from({ length: 5 }).map((_, i) => (
                 <div
+                  className="bg-elevated h-10 animate-pulse rounded"
                   key={i}
-                  className="h-10 bg-elevated rounded animate-pulse"
                   style={{ width: `${80 - i * 10}%` }}
                 />
               ))}
@@ -284,10 +286,10 @@ export default function DashboardPage() {
           {/* Error state */}
           {!loading && error && (
             <div className="p-8 text-center">
-              <p className="text-red-300 mb-4">Something went wrong</p>
+              <p className="mb-4 text-red-300">Something went wrong</p>
               <button
+                className="bg-elevated text-body hover:bg-line inline-flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-sm transition-colors"
                 onClick={loadData}
-                className="inline-flex items-center gap-2 px-4 py-2 font-mono text-sm bg-elevated text-body rounded-lg hover:bg-line transition-colors"
               >
                 <RefreshCw size={14} />
                 Retry
@@ -297,16 +299,16 @@ export default function DashboardPage() {
 
           {/* Empty state */}
           {!loading && !error && workers.length === 0 && (
-            <div className="p-8 text-center text-muted">
+            <div className="text-muted p-8 text-center">
               <p className="mb-2">No workers match your filters.</p>
               <button
+                className="text-accent font-mono text-sm underline-offset-4 hover:underline"
                 onClick={() => {
                   setSearch("");
                   setStatus("");
                   setDepartment("All");
                   setPage(1);
                 }}
-                className="text-accent hover:underline underline-offset-4 font-mono text-sm"
               >
                 Clear all filters
               </button>
@@ -318,68 +320,98 @@ export default function DashboardPage() {
             <>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
-                  <thead className="bg-elevated/70 text-muted uppercase text-xs tracking-wider font-mono">
+                  <thead className="bg-elevated/70 text-muted font-mono text-xs tracking-wider uppercase">
                     <tr>
                       <th
-                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium"
-                        onClick={() => handleSort("name")}
+                        className="hover:text-accent cursor-pointer px-4 py-3 text-left font-medium transition-colors"
+                        onClick={() => sortBy("name")}
                       >
-                        Name <SortIcon field="name" activeField={sortField} dir={sortDir} />
+                        Name{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="name"
+                        />
                       </th>
                       <th
-                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium hidden sm:table-cell"
-                        onClick={() => handleSort("role")}
+                        className="hover:text-accent hidden cursor-pointer px-4 py-3 text-left font-medium transition-colors sm:table-cell"
+                        onClick={() => sortBy("role")}
                       >
-                        Role <SortIcon field="role" activeField={sortField} dir={sortDir} />
+                        Role{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="role"
+                        />
                       </th>
                       <th
-                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium hidden md:table-cell"
-                        onClick={() => handleSort("department")}
+                        className="hover:text-accent hidden cursor-pointer px-4 py-3 text-left font-medium transition-colors md:table-cell"
+                        onClick={() => sortBy("department")}
                       >
-                        Department <SortIcon field="department" activeField={sortField} dir={sortDir} />
+                        Department{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="department"
+                        />
                       </th>
                       <th
-                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium"
-                        onClick={() => handleSort("status")}
+                        className="hover:text-accent cursor-pointer px-4 py-3 text-left font-medium transition-colors"
+                        onClick={() => sortBy("status")}
                       >
-                        Status <SortIcon field="status" activeField={sortField} dir={sortDir} />
+                        Status{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="status"
+                        />
                       </th>
                       <th
-                        className="px-4 py-3 text-right cursor-pointer hover:text-accent transition-colors font-medium hidden sm:table-cell"
-                        onClick={() => handleSort("joinDate")}
+                        className="hover:text-accent hidden cursor-pointer px-4 py-3 text-right font-medium transition-colors sm:table-cell"
+                        onClick={() => sortBy("joinDate")}
                       >
-                        Joined <SortIcon field="joinDate" activeField={sortField} dir={sortDir} />
+                        Joined{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="joinDate"
+                        />
                       </th>
                       <th
-                        className="px-4 py-3 text-right cursor-pointer hover:text-accent transition-colors font-medium"
-                        onClick={() => handleSort("performance")}
+                        className="hover:text-accent cursor-pointer px-4 py-3 text-right font-medium transition-colors"
+                        onClick={() => sortBy("performance")}
                       >
-                        Perf <SortIcon field="performance" activeField={sortField} dir={sortDir} />
+                        Perf{" "}
+                        <SortIcon
+                          activeField={sortField}
+                          dir={sortDir}
+                          field="performance"
+                        />
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-line/70">
+                  <tbody className="divide-line/70 divide-y">
                     {workers.map((worker, i) => (
                       <motion.tr
-                        key={worker.id}
+                        animate={{ opacity: 1, y: 0 }}
                         className="hover:bg-elevated/40 transition-colors"
                         initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25, delay: i * 0.02 }}
+                        key={worker.id}
+                        transition={{ delay: i * 0.02, duration: 0.25 }}
                       >
-                        <td className="px-4 py-3 text-body font-medium">
+                        <td className="text-body px-4 py-3 font-medium">
                           {worker.name}
                         </td>
-                        <td className="px-4 py-3 text-muted hidden sm:table-cell">
+                        <td className="text-muted hidden px-4 py-3 sm:table-cell">
                           {worker.role}
                         </td>
-                        <td className="px-4 py-3 text-muted hidden md:table-cell">
+                        <td className="text-muted hidden px-4 py-3 md:table-cell">
                           {worker.department}
                         </td>
                         <td className="px-4 py-3">
                           {statusBadge(worker.status)}
                         </td>
-                        <td className="px-4 py-3 text-muted text-right hidden sm:table-cell">
+                        <td className="text-muted hidden px-4 py-3 text-right sm:table-cell">
                           {worker.joinDate}
                         </td>
                         <td className="px-4 py-3 text-right">
@@ -388,8 +420,8 @@ export default function DashboardPage() {
                               worker.performance >= 4
                                 ? "text-emerald-400"
                                 : worker.performance >= 3
-                                ? "text-accent"
-                                : "text-red-300"
+                                  ? "text-accent"
+                                  : "text-red-300"
                             }
                           >
                             {worker.performance}
@@ -402,16 +434,16 @@ export default function DashboardPage() {
               </div>
 
               {/* Pagination */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-line text-sm text-muted">
+              <div className="border-line text-muted flex flex-col items-center justify-between gap-3 border-t px-4 py-3 text-sm sm:flex-row">
                 <div className="flex items-center gap-2 font-mono text-xs">
                   <span>Show</span>
                   <select
+                    className={`px-2 py-1 ${inputClass}`}
                     value={pageSize}
                     onChange={(e) => {
                       setPageSize(Number(e.target.value));
                       setPage(1);
                     }}
-                    className={`px-2 py-1 ${inputClass}`}
                   >
                     {PAGE_SIZES.map((size) => (
                       <option key={size} value={size}>
@@ -426,21 +458,21 @@ export default function DashboardPage() {
 
                 <div className="flex items-center gap-1">
                   <button
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    disabled={page === 1}
-                    className="p-1.5 rounded hover:bg-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-muted hover:text-accent"
                     aria-label="Previous page"
+                    className="hover:bg-elevated text-muted hover:text-accent rounded p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+                    disabled={page === 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
                   >
                     <ChevronLeft size={16} />
                   </button>
-                  <span className="px-3 py-1 font-mono text-xs text-body">
+                  <span className="text-body px-3 py-1 font-mono text-xs">
                     {page} / {totalPages || 1}
                   </span>
                   <button
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    disabled={page >= totalPages}
-                    className="p-1.5 rounded hover:bg-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-muted hover:text-accent"
                     aria-label="Next page"
+                    className="hover:bg-elevated text-muted hover:text-accent rounded p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+                    disabled={page >= totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -451,7 +483,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Footer note */}
-        <p className="mt-6 font-mono text-xs text-faint">
+        <p className="text-faint mt-6 font-mono text-xs">
           Data is randomly generated. Simulates a 300ms API delay. Filters and
           pagination happen client-side. In production, these would be
           server-side query parameters.

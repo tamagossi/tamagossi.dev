@@ -1,18 +1,18 @@
 export function VenturaVisual() {
   return (
-    <div className="relative h-full min-h-[220px] w-full" aria-hidden>
+    <div aria-hidden className="relative h-full min-h-[220px] w-full">
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-8">
-        <div className="w-full rounded-lg border border-line bg-surface/60 px-4 py-3 rotate-[-3deg]">
-          <div className="h-2 w-2/5 rounded bg-muted/60" />
-          <div className="mt-2 h-2 w-3/5 rounded bg-faint/60" />
+        <div className="border-line bg-surface/60 w-full rotate-[-3deg] rounded-lg border px-4 py-3">
+          <div className="bg-muted/60 h-2 w-2/5 rounded" />
+          <div className="bg-faint/60 mt-2 h-2 w-3/5 rounded" />
         </div>
-        <div className="w-full rounded-lg border border-accent/40 bg-accent-dim px-4 py-3">
-          <div className="h-2 w-1/3 rounded bg-accent/70" />
-          <div className="mt-2 h-2 w-1/2 rounded bg-muted/50" />
+        <div className="border-accent/40 bg-accent-dim w-full rounded-lg border px-4 py-3">
+          <div className="bg-accent/70 h-2 w-1/3 rounded" />
+          <div className="bg-muted/50 mt-2 h-2 w-1/2 rounded" />
         </div>
-        <div className="w-full rounded-lg border border-line bg-surface/60 px-4 py-3 rotate-[3deg]">
-          <div className="h-2 w-1/2 rounded bg-muted/60" />
-          <div className="mt-2 h-2 w-2/5 rounded bg-faint/60" />
+        <div className="border-line bg-surface/60 w-full rotate-[3deg] rounded-lg border px-4 py-3">
+          <div className="bg-muted/60 h-2 w-1/2 rounded" />
+          <div className="bg-faint/60 mt-2 h-2 w-2/5 rounded" />
         </div>
       </div>
     </div>
@@ -21,17 +21,17 @@ export function VenturaVisual() {
 
 export function MigrationVisual() {
   return (
-    <div className="relative h-full min-h-[220px] w-full" aria-hidden>
+    <div aria-hidden className="relative h-full min-h-[220px] w-full">
       <div className="absolute inset-0 flex items-end justify-center gap-8 p-8">
         <div className="flex flex-col items-center gap-2">
-          <div className="w-16 rounded-t bg-muted/40" style={{ height: 96 }} />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-faint">
+          <div className="bg-muted/40 w-16 rounded-t" style={{ height: 96 }} />
+          <span className="text-faint font-mono text-[10px] tracking-widest uppercase">
             before
           </span>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <div className="w-16 rounded-t bg-accent" style={{ height: 40 }} />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
+          <div className="bg-accent w-16 rounded-t" style={{ height: 40 }} />
+          <span className="text-accent font-mono text-[10px] tracking-widest uppercase">
             after
           </span>
         </div>
@@ -42,43 +42,55 @@ export function MigrationVisual() {
 
 export function TeamVisual() {
   return (
-    <div className="relative h-full min-h-[220px] w-full" aria-hidden>
+    <div aria-hidden className="relative h-full min-h-[220px] w-full">
       <svg
-        viewBox="0 0 200 200"
         className="absolute inset-0 h-full w-full p-4"
         preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 200 200"
       >
         <line
+          className="text-faint/60"
+          stroke="currentColor"
+          strokeWidth="1.5"
           x1="100"
-          y1="50"
           x2="40"
-          y2="140"
-          stroke="currentColor"
-          className="text-faint/60"
-          strokeWidth="1.5"
-        />
-        <line
-          x1="100"
           y1="50"
-          x2="160"
           y2="140"
-          stroke="currentColor"
-          className="text-faint/60"
-          strokeWidth="1.5"
         />
         <line
-          x1="40"
-          y1="140"
-          x2="160"
-          y2="140"
+          className="text-faint/60"
           stroke="currentColor"
-          className="text-faint/40"
           strokeWidth="1.5"
-          strokeDasharray="3 3"
+          x1="100"
+          x2="160"
+          y1="50"
+          y2="140"
         />
-        <circle cx="100" cy="50" r="9" className="fill-accent" />
-        <circle cx="40" cy="140" r="9" className="fill-surface stroke-accent/60" strokeWidth="1.5" />
-        <circle cx="160" cy="140" r="9" className="fill-surface stroke-accent/60" strokeWidth="1.5" />
+        <line
+          className="text-faint/40"
+          stroke="currentColor"
+          strokeDasharray="3 3"
+          strokeWidth="1.5"
+          x1="40"
+          x2="160"
+          y1="140"
+          y2="140"
+        />
+        <circle className="fill-accent" cx="100" cy="50" r="9" />
+        <circle
+          className="fill-surface stroke-accent/60"
+          cx="40"
+          cy="140"
+          r="9"
+          strokeWidth="1.5"
+        />
+        <circle
+          className="fill-surface stroke-accent/60"
+          cx="160"
+          cy="140"
+          r="9"
+          strokeWidth="1.5"
+        />
       </svg>
     </div>
   );

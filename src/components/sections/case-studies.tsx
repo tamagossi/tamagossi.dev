@@ -1,58 +1,59 @@
 "use client";
 
 import Link from "next/link";
-import SectionHeading from "@/components/ui/section-heading";
-import { FadeIn } from "@/components/ui/reveal";
+
 import {
-  VenturaVisual,
   MigrationVisual,
   TeamVisual,
+  VenturaVisual,
 } from "@/components/ui/case-visuals";
+import { FadeIn } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const STUDIES = [
   {
-    title: "Ventura UI Design System",
     category: "design system",
+    href: "/case-studies/ventura-ui",
     summary:
       "How I architected a 12-engineer component library across 3 product squads — from tokens to adoption.",
-    href: "/case-studies/ventura-ui",
+    title: "Ventura UI Design System",
     Visual: VenturaVisual,
   },
   {
-    title: "Next.js 10 → 11 Migration",
     category: "platform migration",
+    href: "/case-studies/nextjs-migration",
     summary:
       "Refactored legacy code, cut build time by 60%, and unblocked framework upgrades with an incremental strategy.",
-    href: "/case-studies/nextjs-migration",
+    title: "Next.js 10 → 11 Migration",
     Visual: MigrationVisual,
   },
   {
-    title: "FE Team Restructuring",
     category: "team & process",
+    href: "/case-studies/team-restructuring",
     summary:
       "Code review norms, testing culture, and mentoring that measurably improved delivery and team health.",
-    href: "/case-studies/team-restructuring",
+    title: "FE Team Restructuring",
     Visual: TeamVisual,
   },
 ];
 
-export default function CaseStudies() {
+export const CaseStudies = () => {
   return (
-    <section id="case-studies" className="py-28 md:py-36 overflow-hidden">
+    <section className="overflow-hidden py-28 md:py-36" id="case-studies">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <SectionHeading eyebrow="selected work" title="Case studies" />
       </div>
 
-      <div className="mt-10 md:mt-16 flex flex-col gap-14 md:gap-8">
+      <div className="mt-10 flex flex-col gap-14 md:mt-16 md:gap-8">
         {STUDIES.map((study, i) => {
           const flip = i % 2 === 1;
           return (
             <FadeIn
-              key={study.href}
-              delay={i * 0.05}
               className={flip ? "md:mt-12 lg:mt-16" : "md:mt-4"}
+              delay={i * 0.05}
+              key={study.href}
             >
-              <Link href={study.href} className="group block relative">
+              <Link className="group relative block" href={study.href}>
                 {/* Text column, kept inside the content container */}
                 <div className="mx-auto max-w-6xl px-6 sm:px-10">
                   <div
@@ -65,17 +66,17 @@ export default function CaseStudies() {
                         flip ? "md:col-start-6" : ""
                       }`}
                     >
-                      <div className="rounded-2xl bg-surface border border-line p-6 md:p-10 transition-colors duration-300 group-hover:border-accent/50">
-                        <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent mb-4">
+                      <div className="bg-surface border-line group-hover:border-accent/50 rounded-2xl border p-6 transition-colors duration-300 md:p-10">
+                        <p className="text-accent mb-4 font-mono text-xs tracking-[0.22em] uppercase">
                           {study.category}
                         </p>
-                        <h3 className="font-sans text-2xl md:text-3xl font-bold text-ink tracking-tight transition-colors duration-300 group-hover:text-accent">
+                        <h3 className="text-ink group-hover:text-accent font-sans text-2xl font-bold tracking-tight transition-colors duration-300 md:text-3xl">
                           {study.title}
                         </h3>
-                        <p className="mt-3 max-w-xl text-body leading-relaxed">
+                        <p className="text-body mt-3 max-w-xl leading-relaxed">
                           {study.summary}
                         </p>
-                        <span className="mt-6 inline-flex items-center gap-2 font-mono text-sm text-accent">
+                        <span className="text-accent mt-6 inline-flex items-center gap-2 font-mono text-sm">
                           Read case study
                           <span className="transition-transform duration-200 group-hover:translate-x-1.5">
                             →
@@ -88,17 +89,17 @@ export default function CaseStudies() {
 
                 {/* Visual panel — bleeds to the viewport edge on the outer side */}
                 <div
-                  className={`absolute top-1/2 -translate-y-1/2 hidden md:block h-[78%] min-h-[230px] w-[52%] ${
+                  aria-hidden
+                  className={`absolute top-1/2 hidden h-[78%] min-h-[230px] w-[52%] -translate-y-1/2 md:block ${
                     flip ? "left-0" : "right-0"
                   }`}
-                  aria-hidden
                 >
                   <div
-                    className={`relative h-full w-full overflow-hidden border-y border-line/60 ${
+                    className={`border-line/60 relative h-full w-full overflow-hidden border-y ${
                       flip ? "rounded-r-2xl" : "rounded-l-2xl"
                     }`}
                   >
-                    <div className="absolute inset-0 bg-base" />
+                    <div className="bg-base absolute inset-0" />
                     <div className="relative h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.04]">
                       <study.Visual />
                     </div>
@@ -111,4 +112,4 @@ export default function CaseStudies() {
       </div>
     </section>
   );
-}
+};
