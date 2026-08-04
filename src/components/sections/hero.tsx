@@ -83,7 +83,7 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: EASE, delay: 1.25 }}
           className="mt-6 max-w-xl text-body leading-relaxed"
         >
-          I&apos;m Raka — I architect design systems, lead 12-engineer frontend
+          I&apos;m Raka — I architect design systems, lead frontend
           teams, and ship data-heavy product UI. Seven years of turning
           frontend chaos into order at scale.
         </motion.p>

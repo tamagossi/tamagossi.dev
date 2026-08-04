@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ventura UI Design System — Raka Pratama",
   description:
-    "How I architected a 12-engineer component library across 3 product squads at Staffinc.",
+    "How I architected a design system used across 3 product squads at Staffinc.",
 };
 
 export default function VenturaUIPage() {
@@ -14,7 +14,7 @@ export default function VenturaUIPage() {
         Ventura UI Design System
       </h1>
       <p className="mb-8">
-        Lead Architect · 12 engineers, 3 squads · 2024–Present
+        Lead Architect · 2 FE engineers, 3 squads · 2024–Present
       </p>
 
       <h2 className="mt-10">

@@ -14,14 +14,14 @@ export default function TeamRestructuringPage() {
         Frontend Team Restructuring & Standardization
       </h1>
       <p className="mb-8">
-        Chapter Lead · 12 engineers · Staffinc · 2024–Present
+        Chapter Lead · 2 FE engineers, cross-functional squads · Staffinc · 2024–Present
       </p>
 
       <h2 className="mt-10">
         Problem
       </h2>
       <p>
-        When I stepped into the Chapter Lead role, the 12-person frontend team
+        When I stepped into the Chapter Lead role, the frontend team
         had grown fast but without shared standards. Each squad had its own way
         of doing code reviews, testing (or not testing), and structuring
         components. Knowledge was siloed — what one squad learned stayed in that

@@ -21,7 +21,7 @@ const EXPERIENCE: Role[] = [
     company: "Staffinc",
     companyUrl: "https://staffinc.co",
     description:
-      "Lead a 12-engineer frontend team across 3 product squads. Architected Ventura UI design system, drove Next.js migration, introduced code review and testing standards that cut bug rates from 100%+ to 70% and reduced build time by 60%.",
+      "Lead 2 frontend engineers as Chapter Lead. As squad lead, coordinate cross-functional teams of 1 FE, 2 BE, 2 QA, and 1–2 mobile engineers per sprint. Architected Ventura UI design system, drove Next.js migration, introduced code review and testing standards that cut bug rates from 100%+ to 70% and reduced build time by 60%.",
     tags: [
       "React",
       "Next.js",
