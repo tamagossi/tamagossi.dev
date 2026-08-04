@@ -1,6 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
+import SectionHeading from "@/components/ui/section-heading";
+import { FadeIn } from "@/components/ui/reveal";
 
 interface Role {
   period: string;
@@ -35,14 +38,7 @@ const EXPERIENCE: Role[] = [
     companyUrl: "https://staffinc.co",
     description:
       "Created design system and monorepo architecture for recruitment and admin portals. Achieved 72% test coverage from scratch. Migrated Client Portal from atomic design to domain-driven design, reducing unoptimized code and enabling faster hot reload.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Monorepo",
-      "DDD",
-      "TDD",
-      "Design Systems",
-    ],
+    tags: ["React", "TypeScript", "Monorepo", "DDD", "TDD", "Design Systems"],
   },
   {
     period: "2025 — 2026",
@@ -71,67 +67,97 @@ const EXPERIENCE: Role[] = [
 ];
 
 export default function Experience() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 75%", "end 60%"],
+  });
+
   return (
-    <motion.section
-      id="experience"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-slate-400 mb-8">
-        Experience
-      </h2>
+    <section id="experience" className="py-28 md:py-36 bg-surface/40">
+      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+        <SectionHeading eyebrow="career" title="Where I've worked" />
 
-      <div className="space-y-16">
-        {EXPERIENCE.map((role, i) => (
-          <div key={i} className="group">
-            <p className="text-xs uppercase tracking-[0.1em] text-slate-400 mb-2">
-              {role.period}
-            </p>
-            <h3 className="text-slate-50 font-medium">
-              {role.title} ·{" "}
-              {role.companyUrl ? (
-                <a
-                  href={role.companyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-teal-300 hover:underline"
-                >
-                  {role.company}
-                </a>
-              ) : (
-                <span>{role.company}</span>
-              )}
-            </h3>
-            <p className="text-slate-400 mt-2 leading-relaxed max-w-xl">
-              {role.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {role.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs rounded-full bg-teal-300/10 text-teal-300"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+        <div ref={ref} className="relative">
+          {/* Rail */}
+          <div
+            className="absolute left-3 top-1 bottom-1 w-px bg-line"
+            aria-hidden
+          />
+          <motion.div
+            className="absolute left-3 top-1 bottom-1 w-px bg-accent origin-top"
+            style={{ scaleY: scrollYProgress }}
+            aria-hidden
+          />
+
+          <div className="space-y-16 md:space-y-20 pl-10">
+            {EXPERIENCE.map((role, i) => (
+              <FadeIn key={i} delay={0.05}>
+                <div className="relative">
+                  {/* Dot */}
+                  <span
+                    className="absolute -left-7 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-base border-2 border-accent"
+                    aria-hidden
+                  />
+
+                  <div className="md:grid md:grid-cols-[170px_1fr] md:gap-8">
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted mb-2 md:mb-0 md:pt-1">
+                      {role.period}
+                    </p>
+                    <div>
+                      <h3 className="font-sans text-lg font-bold text-ink">
+                        {role.title}
+                        <span className="text-muted font-normal"> · </span>
+                        {role.companyUrl ? (
+                          <a
+                            href={role.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-accent hover:underline underline-offset-4"
+                          >
+                            {role.company}
+                          </a>
+                        ) : (
+                          <span className="text-muted">{role.company}</span>
+                        )}
+                      </h3>
+                      <p className="mt-2 text-body leading-relaxed max-w-2xl">
+                        {role.description}
+                      </p>
+                      <ul className="flex flex-wrap gap-2 mt-4">
+                        {role.tags.map((tag) => (
+                          <li
+                            key={tag}
+                            className="rounded-full bg-accent-dim border border-accent/20 px-3 py-1 font-mono text-xs text-accent"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
 
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 mt-8 text-sm text-teal-300 hover:underline group"
-      >
-        View Full Résumé
-        <span className="transition-transform group-hover:translate-x-1">
-          →
-        </span>
-      </a>
-    </motion.section>
+        <FadeIn delay={0.05} className="mt-14">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 font-mono text-sm text-accent"
+          >
+            <span className="underline underline-offset-4 group-hover:text-accent-strong">
+              View full résumé
+            </span>
+            <span className="transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
+          </a>
+        </FadeIn>
+      </div>
+    </section>
   );
 }

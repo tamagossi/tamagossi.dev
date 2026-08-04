@@ -2,7 +2,7 @@ import CaseStudyLayout from "@/components/layout/case-study-layout";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js 10 → 11 Migration — Auliya Raka Pratama",
+  title: "Next.js 10 → 11 Migration — Raka Pratama",
   description:
     "Refactored legacy code and cut build time by 60% to unblock framework upgrades at Staffinc.",
 };
@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default function NextjsMigrationPage() {
   return (
     <CaseStudyLayout>
-      <h1 className="text-3xl font-bold text-slate-50 mb-2">
+      <h1 className="mb-2">
         Next.js 10 → 11 Migration & Build Optimization
       </h1>
-      <p className="text-sm text-teal-300 mb-8">
+      <p className="mb-8">
         Lead Engineer · Staffinc · 2024
       </p>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Problem
       </h2>
       <p>
@@ -30,7 +30,7 @@ export default function NextjsMigrationPage() {
         methods — made any version bump risky.
       </p>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Approach & Decisions
       </h2>
       <p>
@@ -62,7 +62,7 @@ export default function NextjsMigrationPage() {
         </li>
       </ul>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Implementation
       </h2>
       <p>
@@ -80,7 +80,7 @@ export default function NextjsMigrationPage() {
         mentoring opportunity.
       </p>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Result
       </h2>
       <ul>
@@ -90,7 +90,7 @@ export default function NextjsMigrationPage() {
         <li>3 junior engineers leveled up through paired refactoring sessions</li>
       </ul>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Lessons
       </h2>
       <p>

@@ -1,8 +1,18 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { ArrowLeft, Search, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Search,
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  RefreshCw,
+} from "lucide-react";
+import Header from "@/components/layout/header";
 import { mockWorkers, type Worker } from "@/lib/mock-data";
 
 type Status = Worker["status"];
@@ -16,7 +26,10 @@ const STATUS_OPTIONS: { value: Status | ""; label: string }[] = [
   { value: "on_leave", label: "On Leave" },
 ];
 
-const DEPARTMENTS = ["All", ...Array.from(new Set(mockWorkers.map((w) => w.department)))].sort();
+const DEPARTMENTS = [
+  "All",
+  ...Array.from(new Set(mockWorkers.map((w) => w.department))),
+].sort();
 const PAGE_SIZES = [10, 25, 50];
 
 // Simulate API call with delay
@@ -80,6 +93,23 @@ function fetchWorkers(params: {
   });
 }
 
+function SortIcon({
+  field,
+  activeField,
+  dir,
+}: {
+  field: SortField;
+  activeField: SortField;
+  dir: SortDir;
+}) {
+  if (activeField !== field) return null;
+  return dir === "asc" ? (
+    <ChevronUp size={14} className="inline ml-1" />
+  ) : (
+    <ChevronDown size={14} className="inline ml-1" />
+  );
+}
+
 export default function DashboardPage() {
   // Filter state
   const [search, setSearch] = useState("");
@@ -99,7 +129,15 @@ export default function DashboardPage() {
   const loadData = useCallback(() => {
     setLoading(true);
     setError(null);
-    fetchWorkers({ search, status, department, sortField, sortDir, page, pageSize })
+    fetchWorkers({
+      search,
+      status,
+      department,
+      sortField,
+      sortDir,
+      page,
+      pageSize,
+    })
       .then((data) => {
         setWorkers(data.workers);
         setTotal(data.total);
@@ -112,8 +150,15 @@ export default function DashboardPage() {
   }, [search, status, department, sortField, sortDir, page, pageSize]);
 
   // Load on mount and when params change
-  useMemo(() => {
-    loadData();
+  useEffect(() => {
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      if (!cancelled) loadData();
+    }, 0);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [loadData]);
 
   const totalPages = Math.ceil(total / pageSize);
@@ -128,282 +173,290 @@ export default function DashboardPage() {
     setPage(1);
   };
 
-  const SortIcon = ({ field }: { field: SortField }) => {
-    if (sortField !== field) return null;
-    return sortDir === "asc" ? (
-      <ChevronUp size={14} className="inline ml-1" />
-    ) : (
-      <ChevronDown size={14} className="inline ml-1" />
-    );
-  };
-
   const statusBadge = (s: Status) => {
     const colors: Record<Status, string> = {
-      active: "bg-green-900/30 text-green-400 border-green-800",
-      inactive: "bg-slate-800 text-slate-400 border-slate-700",
-      on_leave: "bg-yellow-900/30 text-yellow-400 border-yellow-800",
+      active: "bg-emerald-900/30 text-emerald-400 border-emerald-800",
+      inactive: "bg-elevated text-muted border-line",
+      on_leave: "bg-accent-dim text-accent border-accent/30",
     };
     return (
-      <span className={`px-2 py-0.5 text-xs rounded-full border ${colors[s]}`}>
+      <span
+        className={`px-2 py-0.5 text-xs rounded-full border font-mono uppercase tracking-wide ${colors[s]}`}
+      >
         {s.replace("_", " ")}
       </span>
     );
   };
 
+  const inputClass =
+    "bg-surface border border-line rounded-lg text-sm text-body placeholder:text-faint focus:outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/30 transition-colors";
+
   return (
-    <div className="lg:ml-[40%] lg:w-[60%] w-full lg:pt-0 pt-20 px-6 pb-24 lg:px-16 lg:py-24">
-      <Link
-        href="/#demo"
-        className="inline-flex items-center gap-2 text-sm text-teal-300 hover:underline mb-8 group"
-      >
-        <ArrowLeft
-          size={16}
-          className="transition-transform group-hover:-translate-x-1"
-        />
-        Back home
-      </Link>
+    <div className="pt-16 min-h-screen">
+      <Header />
 
-      <h1 className="text-2xl font-bold text-slate-50 mb-2">
-        Data-Heavy Dashboard
-      </h1>
-      <p className="text-slate-400 mb-8 text-sm">
-        Worker records with search, filters, sorting, pagination, and URL-based
-        state. Demonstrates production frontend patterns.
-      </p>
-
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-6">
-        <div className="relative flex-1">
-          <Search
-            size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-          />
-          <input
-            type="text"
-            placeholder="Search by name or role..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-            className="w-full pl-10 pr-4 py-2 bg-navy-900 border border-navy-700 rounded-lg text-sm text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-teal-300/50 focus:ring-1 focus:ring-teal-300/50"
-          />
-        </div>
-        <select
-          value={status}
-          onChange={(e) => {
-            setStatus(e.target.value as Status | "");
-            setPage(1);
-          }}
-          className="px-3 py-2 bg-navy-900 border border-navy-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-teal-300/50"
+      <main className="mx-auto max-w-6xl px-6 sm:px-10 py-14 md:py-20">
+        <Link
+          href="/#demo"
+          className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors mb-10"
         >
-          {STATUS_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              Status: {opt.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={department}
-          onChange={(e) => {
-            setDepartment(e.target.value);
-            setPage(1);
-          }}
-          className="px-3 py-2 bg-navy-900 border border-navy-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-teal-300/50"
-        >
-          {DEPARTMENTS.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
-            </option>
-          ))}
-        </select>
-      </div>
+          <ArrowLeft
+            size={15}
+            className="transition-transform duration-200 group-hover:-translate-x-1"
+          />
+          Back home
+        </Link>
 
-      {/* Content */}
-      <div className="bg-navy-900 border border-navy-800 rounded-lg overflow-hidden">
-        {/* Loading state */}
-        {loading && (
-          <div className="p-8 space-y-3">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-10 bg-navy-800 rounded animate-pulse"
-                style={{ width: `${80 - i * 10}%` }}
-              />
-            ))}
-          </div>
-        )}
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent mb-4">
+          {"// "}live proof
+        </p>
+        <h1 className="font-sans text-3xl md:text-4xl font-bold text-ink tracking-tight">
+          Data-Heavy Dashboard
+        </h1>
+        <p className="text-muted mt-3 mb-10 max-w-xl">
+          Worker records with search, filters, sorting, pagination, and
+          loading/empty/error states. Demonstrates production frontend patterns.
+        </p>
 
-        {/* Error state */}
-        {!loading && error && (
-          <div className="p-8 text-center">
-            <p className="text-red-400 mb-3">Something went wrong</p>
-            <button
-              onClick={loadData}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-navy-800 text-slate-200 rounded-lg hover:bg-navy-700 transition-colors"
-            >
-              <RefreshCw size={14} />
-              Retry
-            </button>
-          </div>
-        )}
-
-        {/* Empty state */}
-        {!loading && !error && workers.length === 0 && (
-          <div className="p-8 text-center text-slate-400">
-            <p className="mb-2">No workers match your filters.</p>
-            <button
-              onClick={() => {
-                setSearch("");
-                setStatus("");
-                setDepartment("All");
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <div className="relative flex-1">
+            <Search
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-faint"
+            />
+            <input
+              type="text"
+              placeholder="Search by name or role..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
                 setPage(1);
               }}
-              className="text-teal-300 hover:underline text-sm"
-            >
-              Clear all filters
-            </button>
+              className={`w-full pl-10 pr-4 py-2 ${inputClass}`}
+            />
           </div>
-        )}
+          <select
+            value={status}
+            onChange={(e) => {
+              setStatus(e.target.value as Status | "");
+              setPage(1);
+            }}
+            className={`px-3 py-2 ${inputClass}`}
+          >
+            {STATUS_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                Status: {opt.label}
+              </option>
+            ))}
+          </select>
+          <select
+            value={department}
+            onChange={(e) => {
+              setDepartment(e.target.value);
+              setPage(1);
+            }}
+            className={`px-3 py-2 ${inputClass}`}
+          >
+            {DEPARTMENTS.map((dept) => (
+              <option key={dept} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        {/* Table */}
-        {!loading && !error && workers.length > 0 && (
-          <>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-navy-800 text-slate-400 uppercase text-xs tracking-wider">
-                  <tr>
-                    <th
-                      className="px-4 py-3 text-left cursor-pointer hover:text-teal-300 transition-colors"
-                      onClick={() => handleSort("name")}
-                    >
-                      Name <SortIcon field="name" />
-                    </th>
-                    <th
-                      className="px-4 py-3 text-left cursor-pointer hover:text-teal-300 transition-colors hidden sm:table-cell"
-                      onClick={() => handleSort("role")}
-                    >
-                      Role <SortIcon field="role" />
-                    </th>
-                    <th
-                      className="px-4 py-3 text-left cursor-pointer hover:text-teal-300 transition-colors hidden md:table-cell"
-                      onClick={() => handleSort("department")}
-                    >
-                      Department <SortIcon field="department" />
-                    </th>
-                    <th
-                      className="px-4 py-3 text-left cursor-pointer hover:text-teal-300 transition-colors"
-                      onClick={() => handleSort("status")}
-                    >
-                      Status <SortIcon field="status" />
-                    </th>
-                    <th
-                      className="px-4 py-3 text-right cursor-pointer hover:text-teal-300 transition-colors hidden sm:table-cell"
-                      onClick={() => handleSort("joinDate")}
-                    >
-                      Joined <SortIcon field="joinDate" />
-                    </th>
-                    <th
-                      className="px-4 py-3 text-right cursor-pointer hover:text-teal-300 transition-colors"
-                      onClick={() => handleSort("performance")}
-                    >
-                      Perf <SortIcon field="performance" />
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-navy-800">
-                  {workers.map((worker) => (
-                    <tr
-                      key={worker.id}
-                      className="hover:bg-navy-800/50 transition-colors"
-                    >
-                      <td className="px-4 py-3 text-slate-200 font-medium">
-                        {worker.name}
-                      </td>
-                      <td className="px-4 py-3 text-slate-400 hidden sm:table-cell">
-                        {worker.role}
-                      </td>
-                      <td className="px-4 py-3 text-slate-400 hidden md:table-cell">
-                        {worker.department}
-                      </td>
-                      <td className="px-4 py-3">{statusBadge(worker.status)}</td>
-                      <td className="px-4 py-3 text-slate-400 text-right hidden sm:table-cell">
-                        {worker.joinDate}
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        <span
-                          className={
-                            worker.performance >= 4
-                              ? "text-green-400"
-                              : worker.performance >= 3
-                              ? "text-yellow-400"
-                              : "text-red-400"
-                          }
-                        >
-                          {worker.performance}
-                        </span>
-                      </td>
+        {/* Content */}
+        <div className="bg-surface border border-line rounded-2xl overflow-hidden">
+          {/* Loading state */}
+          {loading && (
+            <div className="p-8 space-y-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-10 bg-elevated rounded animate-pulse"
+                  style={{ width: `${80 - i * 10}%` }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Error state */}
+          {!loading && error && (
+            <div className="p-8 text-center">
+              <p className="text-red-300 mb-4">Something went wrong</p>
+              <button
+                onClick={loadData}
+                className="inline-flex items-center gap-2 px-4 py-2 font-mono text-sm bg-elevated text-body rounded-lg hover:bg-line transition-colors"
+              >
+                <RefreshCw size={14} />
+                Retry
+              </button>
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!loading && !error && workers.length === 0 && (
+            <div className="p-8 text-center text-muted">
+              <p className="mb-2">No workers match your filters.</p>
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setStatus("");
+                  setDepartment("All");
+                  setPage(1);
+                }}
+                className="text-accent hover:underline underline-offset-4 font-mono text-sm"
+              >
+                Clear all filters
+              </button>
+            </div>
+          )}
+
+          {/* Table */}
+          {!loading && !error && workers.length > 0 && (
+            <>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-elevated/70 text-muted uppercase text-xs tracking-wider font-mono">
+                    <tr>
+                      <th
+                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium"
+                        onClick={() => handleSort("name")}
+                      >
+                        Name <SortIcon field="name" activeField={sortField} dir={sortDir} />
+                      </th>
+                      <th
+                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium hidden sm:table-cell"
+                        onClick={() => handleSort("role")}
+                      >
+                        Role <SortIcon field="role" activeField={sortField} dir={sortDir} />
+                      </th>
+                      <th
+                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium hidden md:table-cell"
+                        onClick={() => handleSort("department")}
+                      >
+                        Department <SortIcon field="department" activeField={sortField} dir={sortDir} />
+                      </th>
+                      <th
+                        className="px-4 py-3 text-left cursor-pointer hover:text-accent transition-colors font-medium"
+                        onClick={() => handleSort("status")}
+                      >
+                        Status <SortIcon field="status" activeField={sortField} dir={sortDir} />
+                      </th>
+                      <th
+                        className="px-4 py-3 text-right cursor-pointer hover:text-accent transition-colors font-medium hidden sm:table-cell"
+                        onClick={() => handleSort("joinDate")}
+                      >
+                        Joined <SortIcon field="joinDate" activeField={sortField} dir={sortDir} />
+                      </th>
+                      <th
+                        className="px-4 py-3 text-right cursor-pointer hover:text-accent transition-colors font-medium"
+                        onClick={() => handleSort("performance")}
+                      >
+                        Perf <SortIcon field="performance" activeField={sortField} dir={sortDir} />
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-navy-800 text-sm text-slate-400">
-              <div className="flex items-center gap-2">
-                <span>Show</span>
-                <select
-                  value={pageSize}
-                  onChange={(e) => {
-                    setPageSize(Number(e.target.value));
-                    setPage(1);
-                  }}
-                  className="px-2 py-1 bg-navy-800 border border-navy-700 rounded text-slate-200 text-sm focus:outline-none focus:border-teal-300/50"
-                >
-                  {PAGE_SIZES.map((size) => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
-                </select>
-                <span>
-                  of {total} worker{total !== 1 ? "s" : ""}
-                </span>
+                  </thead>
+                  <tbody className="divide-y divide-line/70">
+                    {workers.map((worker, i) => (
+                      <motion.tr
+                        key={worker.id}
+                        className="hover:bg-elevated/40 transition-colors"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25, delay: i * 0.02 }}
+                      >
+                        <td className="px-4 py-3 text-body font-medium">
+                          {worker.name}
+                        </td>
+                        <td className="px-4 py-3 text-muted hidden sm:table-cell">
+                          {worker.role}
+                        </td>
+                        <td className="px-4 py-3 text-muted hidden md:table-cell">
+                          {worker.department}
+                        </td>
+                        <td className="px-4 py-3">
+                          {statusBadge(worker.status)}
+                        </td>
+                        <td className="px-4 py-3 text-muted text-right hidden sm:table-cell">
+                          {worker.joinDate}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <span
+                            className={
+                              worker.performance >= 4
+                                ? "text-emerald-400"
+                                : worker.performance >= 3
+                                ? "text-accent"
+                                : "text-red-300"
+                            }
+                          >
+                            {worker.performance}
+                          </span>
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
 
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="p-1.5 rounded hover:bg-navy-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Previous page"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <span className="px-3 py-1 text-slate-200">
-                  {page} / {totalPages || 1}
-                </span>
-                <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page >= totalPages}
-                  className="p-1.5 rounded hover:bg-navy-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Next page"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+              {/* Pagination */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-line text-sm text-muted">
+                <div className="flex items-center gap-2 font-mono text-xs">
+                  <span>Show</span>
+                  <select
+                    value={pageSize}
+                    onChange={(e) => {
+                      setPageSize(Number(e.target.value));
+                      setPage(1);
+                    }}
+                    className={`px-2 py-1 ${inputClass}`}
+                  >
+                    {PAGE_SIZES.map((size) => (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    ))}
+                  </select>
+                  <span>
+                    of {total} worker{total !== 1 ? "s" : ""}
+                  </span>
+                </div>
 
-      {/* Footer note */}
-      <p className="mt-6 text-xs text-slate-400">
-        Data is randomly generated. Simulates a 300ms API delay. Filters and
-        pagination happen client-side. In production, these would be server-side
-        query parameters.
-      </p>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={page === 1}
+                    className="p-1.5 rounded hover:bg-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-muted hover:text-accent"
+                    aria-label="Previous page"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="px-3 py-1 font-mono text-xs text-body">
+                    {page} / {totalPages || 1}
+                  </span>
+                  <button
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={page >= totalPages}
+                    className="p-1.5 rounded hover:bg-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-muted hover:text-accent"
+                    aria-label="Next page"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Footer note */}
+        <p className="mt-6 font-mono text-xs text-faint">
+          Data is randomly generated. Simulates a 300ms API delay. Filters and
+          pagination happen client-side. In production, these would be
+          server-side query parameters.
+        </p>
+      </main>
     </div>
   );
 }

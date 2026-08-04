@@ -1,6 +1,6 @@
 # tamagossi.dev
 
-Personal portfolio website for **Auliya Raka Pratama** — Lead Frontend Engineer based in Bandung, Indonesia.
+Personal portfolio website for **Raka Pratama** — Lead Frontend Engineer based in Bandung, Indonesia.
 
 **Live:** [tamagossi.dev](https://tamagossi.dev)
 

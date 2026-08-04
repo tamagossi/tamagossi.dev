@@ -2,7 +2,7 @@ import CaseStudyLayout from "@/components/layout/case-study-layout";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FE Team Restructuring — Auliya Raka Pratama",
+  title: "FE Team Restructuring — Raka Pratama",
   description:
     "How I introduced code review norms, testing culture, and mentoring that measurably improved delivery at Staffinc.",
 };
@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default function TeamRestructuringPage() {
   return (
     <CaseStudyLayout>
-      <h1 className="text-3xl font-bold text-slate-50 mb-2">
+      <h1 className="mb-2">
         Frontend Team Restructuring & Standardization
       </h1>
-      <p className="text-sm text-teal-300 mb-8">
+      <p className="mb-8">
         Chapter Lead · 12 engineers · Staffinc · 2024–Present
       </p>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Problem
       </h2>
       <p>
@@ -30,7 +30,7 @@ export default function TeamRestructuringPage() {
         other when things broke. Morale was declining.
       </p>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Approach & Decisions
       </h2>
       <p>
@@ -66,7 +66,7 @@ export default function TeamRestructuringPage() {
         </li>
       </ul>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Implementation
       </h2>
       <ul>
@@ -77,7 +77,7 @@ export default function TeamRestructuringPage() {
         <li>Month 4–6: Iterated on standards based on team feedback</li>
       </ul>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Result
       </h2>
       <ul>
@@ -88,7 +88,7 @@ export default function TeamRestructuringPage() {
         <li>Developer blame culture replaced with ownership and psychological safety</li>
       </ul>
 
-      <h2 className="text-lg font-semibold text-slate-50 mt-8 mb-3">
+      <h2 className="mt-10">
         Lessons
       </h2>
       <p>

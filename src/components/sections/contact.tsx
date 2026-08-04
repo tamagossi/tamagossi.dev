@@ -1,68 +1,91 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { FadeIn, WordReveal } from "@/components/ui/reveal";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  FileTextIcon,
+} from "@/components/ui/icons";
+
+const LINKS = [
+  {
+    label: "GitHub",
+    href: "https://github.com/tamagossi",
+    Icon: GitHubIcon,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/tamagossi",
+    Icon: LinkedInIcon,
+  },
+  {
+    label: "Email",
+    href: "mailto:mgf.prauliyatama@gmail.com",
+    Icon: MailIcon,
+  },
+  {
+    label: "Résumé",
+    href: "/resume.pdf",
+    Icon: FileTextIcon,
+  },
+];
 
 export default function Contact() {
   return (
-    <motion.section
-      id="contact"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-slate-400 mb-8">
-        Contact
-      </h2>
+    <section id="contact" className="py-28 md:py-40">
+      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+        <FadeIn>
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent mb-4">
+            {"// "}contact
+          </p>
+          <WordReveal
+            as="h2"
+            text="Let's build something that scales."
+            className="font-sans text-4xl md:text-5xl font-bold text-ink tracking-tight leading-tight max-w-2xl"
+          />
+        </FadeIn>
 
-      <div className="space-y-3 text-slate-400 max-w-xl">
-        <p>
+        <FadeIn delay={0.15} className="mt-10 max-w-xl">
+          <p className="text-body leading-relaxed">
+            I&apos;m open to lead frontend roles, design-system work, and
+            consulting on scaling product UI. If you&apos;re building something
+            data-heavy or turning frontend chaos into systems, let&apos;s talk.
+          </p>
+
           <a
             href="mailto:mgf.prauliyatama@gmail.com"
-            className="text-teal-300 hover:underline"
+            className="mt-8 inline-block font-mono text-xl md:text-2xl font-semibold text-accent underline underline-offset-8 decoration-accent/40 hover:decoration-accent transition-colors"
           >
             mgf.prauliyatama@gmail.com
           </a>
-        </p>
-        <p>
-          <a
-            href="https://github.com/tamagossi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal-300 hover:underline"
-          >
-            github.com/tamagossi
-          </a>
-        </p>
-        <p>
-          <a
-            href="https://linkedin.com/in/tamagossi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal-300 hover:underline"
-          >
-            linkedin.com/in/tamagossi
-          </a>
-        </p>
-        <p>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal-300 hover:underline inline-flex items-center gap-1 group"
-          >
-            Download Résumé (PDF)
-            <span className="transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </a>
-        </p>
-      </div>
+        </FadeIn>
 
-      <p className="text-slate-400 text-sm mt-8 max-w-xl">
-        GMT+7 (Bandung, Indonesia) — experienced in async collaboration across
-        8–12h timezone gaps.
-      </p>
-    </motion.section>
+        <FadeIn delay={0.25} className="mt-12">
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-4">
+            {LINKS.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group inline-flex items-center gap-2 font-mono text-sm text-muted hover:text-accent transition-colors"
+                >
+                  <Icon size={17} />
+                  <span className="group-hover:underline underline-offset-4">
+                    {label}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-10 border-t border-line/70 pt-6 font-mono text-xs text-faint max-w-xl">
+            GMT+7 (Bandung, Indonesia) — experienced in async collaboration
+            across 8–12h timezone gaps.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
   );
 }

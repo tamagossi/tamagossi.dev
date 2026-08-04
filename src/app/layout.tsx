@@ -1,19 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Syne, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import PageFade from "@/components/layout/page-fade";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Auliya Raka Pratama — Lead Frontend Engineer",
+  title: "Raka Pratama — Lead Frontend Engineer",
   description:
     "I architect design systems, lead frontend teams, and build data-heavy product UI. 7+ years at scale.",
 };
@@ -26,10 +36,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
+      className={`${syne.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
-      <body className="bg-navy-950 text-slate-200 font-sans antialiased min-h-screen">
-        {children}
+      <body className="bg-base text-body antialiased min-h-screen">
+        <PageFade>{children}</PageFade>
       </body>
     </html>
   );
