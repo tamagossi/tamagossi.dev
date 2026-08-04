@@ -166,6 +166,7 @@ export default function Header() {
         {open && (
           <motion.div
             className="md:hidden fixed inset-0 top-16 z-40 bg-base flex flex-col px-6 pb-10 pt-8"
+            data-lenis-prevent
             initial={disabled ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={disabled ? undefined : { opacity: 0 }}

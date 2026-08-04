@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import PageFade from "@/components/layout/page-fade";
+import SmoothScroll from "@/components/layout/smooth-scroll";
 import "./globals.css";
 
 const syne = Syne({
@@ -36,10 +37,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} scroll-smooth`}
+      className={`${syne.variable} ${sourceSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-base text-body antialiased min-h-screen">
-        <PageFade>{children}</PageFade>
+        <SmoothScroll>
+          <PageFade>{children}</PageFade>
+        </SmoothScroll>
       </body>
     </html>
   );

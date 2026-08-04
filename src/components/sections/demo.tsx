@@ -31,11 +31,14 @@ function perfColor(p: number) {
 
 export default function Demo() {
   return (
-    <section id="demo" className="py-28 md:py-36 bg-surface/40">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+    <section id="demo" className="relative py-28 md:py-36 overflow-hidden">
+      {/* Full-bleed band */}
+      <div className="absolute inset-0 bg-surface/40" aria-hidden />
+
+      <div className="relative mx-auto max-w-6xl px-6 sm:px-10">
         <SectionHeading eyebrow="live proof" title="Interactive demo" />
 
-        <FadeIn>
+        <FadeIn y={30}>
           <div className="rounded-2xl bg-surface border border-line overflow-hidden">
             {/* Window chrome */}
             <div className="flex items-center justify-between border-b border-line px-5 py-3">

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import SectionHeading from "@/components/ui/section-heading";
-import { FadeIn } from "@/components/ui/reveal";
+import { FadeIn, ScaleIn } from "@/components/ui/reveal";
 
 interface Role {
   period: string;
@@ -74,11 +74,19 @@ export default function Experience() {
   });
 
   return (
-    <section id="experience" className="py-28 md:py-36 bg-surface/40">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+    <section
+      id="experience"
+      className="relative py-28 md:py-36 overflow-hidden"
+    >
+      {/* Full-bleed band */}
+      <div className="absolute inset-0 bg-surface/40" aria-hidden />
+      <div className="absolute inset-0 bg-diagonal" aria-hidden />
+
+      <div className="relative mx-auto max-w-6xl px-6 sm:px-10">
         <SectionHeading eyebrow="career" title="Where I've worked" />
 
-        <div ref={ref} className="relative">
+        <ScaleIn>
+          <div ref={ref} className="relative">
           {/* Rail */}
           <div
             className="absolute left-3 top-1 bottom-1 w-px bg-line"
@@ -140,7 +148,8 @@ export default function Experience() {
               </FadeIn>
             ))}
           </div>
-        </div>
+          </div>
+        </ScaleIn>
 
         <FadeIn delay={0.05} className="mt-14">
           <a

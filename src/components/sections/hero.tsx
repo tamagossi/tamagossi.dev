@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import { EASE, useAnimationsDisabled } from "@/components/ui/reveal";
@@ -9,15 +9,28 @@ const NAME = "Raka Pratama";
 
 export default function Hero() {
   const disabled = useAnimationsDisabled();
+  const { scrollY } = useScroll();
+
+  // Background layers drift slower than content for parallax depth.
+  const gridY = useTransform(scrollY, [0, 900], [0, 160]);
+  const glowY = useTransform(scrollY, [0, 900], [0, 220]);
 
   return (
     <section
       id="top"
       className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden"
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-grid" aria-hidden />
-      <div className="absolute inset-0 bg-glow" aria-hidden />
+      {/* Backdrop — extended above so parallax never reveals an edge */}
+      <motion.div
+        className="absolute left-0 right-0 -top-72 h-[calc(100%+18rem)] bg-grid"
+        style={{ y: gridY }}
+        aria-hidden
+      />
+      <motion.div
+        className="absolute left-0 right-0 -top-72 h-[calc(100%+18rem)] bg-glow"
+        style={{ y: glowY }}
+        aria-hidden
+      />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10 py-24">
         {/* Eyebrow */}

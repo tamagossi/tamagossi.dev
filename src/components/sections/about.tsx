@@ -1,7 +1,7 @@
 "use client";
 
 import SectionHeading from "@/components/ui/section-heading";
-import { FadeIn } from "@/components/ui/reveal";
+import { FadeIn, SlideIn } from "@/components/ui/reveal";
 
 const TOKENS = [
   { key: "--color-base", value: "#0c0a09", swatch: "bg-base border border-line" },
@@ -27,7 +27,7 @@ export default function About() {
 
         <div className="grid gap-12 md:grid-cols-[1fr_320px] md:gap-16 items-start">
           {/* Bio */}
-          <FadeIn className="space-y-5 text-body leading-relaxed">
+          <SlideIn className="space-y-5 text-body leading-relaxed">
             <p>
               I&apos;m a Lead Frontend Engineer based in Bandung, Indonesia,
               with 7+ years of experience building design systems, leading
@@ -63,7 +63,7 @@ export default function About() {
               open-source contributor. I believe great software comes from clear
               standards, honest code review, and teams that trust each other.
             </p>
-          </FadeIn>
+          </SlideIn>
 
           {/* Token card — the site's own design system, shown as data */}
           <FadeIn delay={0.15} className="md:sticky md:top-24">

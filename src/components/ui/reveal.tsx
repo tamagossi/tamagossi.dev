@@ -39,6 +39,60 @@ export function FadeIn({
   );
 }
 
+interface SlideInProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  x?: number;
+}
+
+/** Slide in from the side (left by default) with opacity. */
+export function SlideIn({
+  children,
+  className,
+  delay = 0,
+  x = -40,
+}: SlideInProps) {
+  const disabled = useAnimationsDisabled();
+  return (
+    <motion.div
+      className={className}
+      initial={disabled ? false : { opacity: 0, x }}
+      whileInView={disabled ? undefined : { opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.9, ease: EASE, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+interface ScaleInProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+/** Subtle scale-in reveal. */
+export function ScaleIn({
+  children,
+  className,
+  delay = 0,
+}: ScaleInProps) {
+  const disabled = useAnimationsDisabled();
+  return (
+    <motion.div
+      className={className}
+      initial={disabled ? false : { opacity: 0, scale: 0.97 }}
+      whileInView={disabled ? undefined : { opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.8, ease: EASE, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 interface WordRevealProps {
   text: string;
   className?: string;

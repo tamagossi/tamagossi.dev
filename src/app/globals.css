@@ -21,8 +21,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -52,6 +56,15 @@ body {
     ellipse 60% 45% at 50% -5%,
     rgba(251, 191, 36, 0.09),
     transparent
+  );
+}
+
+/* Architectural diagonal texture for full-bleed section bands */
+.bg-diagonal {
+  background-image: repeating-linear-gradient(
+    -12deg,
+    transparent 0 26px,
+    rgba(251, 191, 36, 0.03) 26px 27px
   );
 }
 
