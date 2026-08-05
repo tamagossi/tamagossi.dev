@@ -77,7 +77,17 @@ const eslintConfig = defineConfig([
 
       "perfectionist/sort-interfaces": [
         "error",
-        { order: "asc", type: "alphabetical" },
+        {
+          groups: [
+            "unknown",
+            "index-signature",
+            "method",
+            "property",
+            "multiline-member",
+          ],
+          order: "asc",
+          type: "alphabetical",
+        },
       ],
       "perfectionist/sort-intersection-types": [
         "error",
@@ -93,11 +103,25 @@ const eslintConfig = defineConfig([
       ],
       "perfectionist/sort-object-types": [
         "error",
-        { order: "asc", type: "alphabetical" },
+        {
+          groups: [
+            "unknown",
+            "index-signature",
+            "method",
+            "property",
+            "multiline-member",
+          ],
+          order: "asc",
+          type: "alphabetical",
+        },
       ],
       "perfectionist/sort-objects": [
         "error",
-        { order: "asc", type: "alphabetical" },
+        {
+          groups: ["unknown", "method", "property", "multiline-member"],
+          order: "asc",
+          type: "alphabetical",
+        },
       ],
       "perfectionist/sort-union-types": [
         "error",

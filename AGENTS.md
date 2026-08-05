@@ -45,6 +45,10 @@ rules to follow when writing code.
 - Interface/type members are sorted **alphabetically**
   (`perfectionist/sort-interfaces`, `sort-object-types`, `sort-union-types`,
   `sort-intersection-types`).
+- **Multiline members go last** — for rules that support it (`sort-objects`,
+  `sort-interfaces`, `sort-object-types`, `sort-jsx-props`), non-multiline
+  members sort alphabetically first, then multiline members sort alphabetically
+  in the last group.
 - JSX props are sorted **alphabetically**, multiline props last
   (`perfectionist/sort-jsx-props`).
 - Tailwind classes are sorted via `prettier-plugin-tailwindcss` (logical
