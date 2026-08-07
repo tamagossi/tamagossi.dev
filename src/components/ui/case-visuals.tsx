@@ -40,6 +40,62 @@ export function MigrationVisual() {
   );
 }
 
+export function TribeVisual() {
+  return (
+    <div aria-hidden className="relative h-full min-h-[220px] w-full">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-8">
+        <div className="border-line bg-surface/60 w-2/3 rounded-lg border px-4 py-2.5 text-center">
+          <span className="text-faint font-mono text-[10px] tracking-widest uppercase">
+            UI
+          </span>
+        </div>
+        <svg className="text-accent/70 h-4 w-8" viewBox="0 0 32 16">
+          <line
+            stroke="currentColor"
+            strokeWidth="1.5"
+            x1="2"
+            x2="26"
+            y1="8"
+            y2="8"
+          />
+          <path
+            d="M24 3 L30 8 L24 13"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+        </svg>
+        <div className="border-accent/40 bg-accent-dim w-2/3 rounded-lg border px-4 py-2.5 text-center">
+          <span className="text-accent font-mono text-[10px] tracking-widest uppercase">
+            Node API
+          </span>
+        </div>
+        <svg className="text-accent/70 h-4 w-8" viewBox="0 0 32 16">
+          <line
+            stroke="currentColor"
+            strokeWidth="1.5"
+            x1="2"
+            x2="26"
+            y1="8"
+            y2="8"
+          />
+          <path
+            d="M24 3 L30 8 L24 13"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+        </svg>
+        <div className="border-line bg-surface/60 w-2/3 rounded-lg border px-4 py-2.5 text-center">
+          <span className="text-faint font-mono text-[10px] tracking-widest uppercase">
+            OpenAI · Travily
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function TeamVisual() {
   return (
     <div aria-hidden className="relative h-full min-h-[220px] w-full">

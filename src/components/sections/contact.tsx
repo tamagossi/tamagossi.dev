@@ -48,9 +48,11 @@ export const Contact = () => {
 
         <FadeIn className="mt-10 max-w-xl" delay={0.15}>
           <p className="text-body leading-relaxed">
-            I&apos;m open to lead frontend roles, design-system work, and
-            consulting on scaling product UI. If you&apos;re building something
-            data-heavy or turning frontend chaos into systems, let&apos;s talk.
+            I&apos;m open to product engineer roles — frontend-first, with the
+            backend and API depth to own features end-to-end — plus
+            design-system work and consulting on scaling product UI. If
+            you&apos;re building something data-heavy or turning product chaos
+            into systems, let&apos;s talk.
           </p>
 
           <a

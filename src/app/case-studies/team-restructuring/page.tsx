@@ -5,7 +5,7 @@ import { CaseStudyLayout } from "@/components/layout/case-study-layout";
 export const metadata: Metadata = {
   description:
     "How I introduced code review norms, testing culture, and mentoring that measurably improved delivery at Staffinc.",
-  title: "FE Team Restructuring — Raka Pratama",
+  title: "FE Team Restructuring — Code Review, Testing & Mentoring",
 };
 
 export default function TeamRestructuringPage() {

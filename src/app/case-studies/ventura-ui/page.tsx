@@ -5,7 +5,7 @@ import { CaseStudyLayout } from "@/components/layout/case-study-layout";
 export const metadata: Metadata = {
   description:
     "How I architected a design system used across 3 product squads at Staffinc.",
-  title: "Ventura UI Design System — Raka Pratama",
+  title: "Ventura UI Design System — React, TypeScript, Design Tokens",
 };
 
 export default function VenturaUIPage() {

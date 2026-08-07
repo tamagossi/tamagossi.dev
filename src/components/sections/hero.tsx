@@ -41,7 +41,7 @@ export const Hero = () => {
           initial={disabled ? false : { opacity: 0 }}
           transition={{ delay: 0.1, duration: 0.5, ease: EASE }}
         >
-          {"// lead frontend engineer — bandung, id"}
+          {"// product engineer — bandung, id"}
         </motion.p>
 
         {/* Name: character-by-character reveal */}
@@ -74,7 +74,7 @@ export const Hero = () => {
           initial={disabled ? false : { opacity: 0, y: 18 }}
           transition={{ delay: 1.1, duration: 0.6, ease: EASE }}
         >
-          Frontend systems, built to scale.
+          Frontend-first. Full-stack capable.
         </motion.p>
 
         {/* Intro */}
@@ -84,9 +84,10 @@ export const Hero = () => {
           initial={disabled ? false : { opacity: 0, y: 18 }}
           transition={{ delay: 1.25, duration: 0.6, ease: EASE }}
         >
-          I&apos;m Tama — I architect design systems, lead frontend teams, and
-          ship data-heavy product UI. Seven years of turning frontend chaos into
-          order at scale.
+          I&apos;m Tama — a product engineer who leads frontend architecture and
+          ships end-to-end when it counts. Seven years of turning product chaos
+          into order: design systems, platform migrations, and the Node/API
+          layer behind them.
         </motion.p>
 
         {/* CTAs */}

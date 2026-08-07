@@ -37,10 +37,12 @@ export const About = () => {
           {/* Bio */}
           <SlideIn className="text-body space-y-5 leading-relaxed">
             <p>
-              I&apos;m a Lead Frontend Engineer based in Bandung, Indonesia,
-              with 7+ years of experience building design systems, leading
-              frontend teams, and shipping data-heavy product UI at scale.
-              Currently Chapter Lead at{" "}
+              I&apos;m a Product Engineer based in Bandung, Indonesia —
+              frontend-first, with 7+ years of experience building design
+              systems, leading frontend teams, and shipping data-heavy product
+              UI at scale. I&apos;ve also shipped what sits behind the UI:
+              Node.js services, REST and OpenAI API integrations, and
+              PostgreSQL-backed features. Currently Chapter Lead at{" "}
               <a
                 className="text-accent underline-offset-4 hover:underline"
                 href="https://staffinc.co"
@@ -50,8 +52,8 @@ export const About = () => {
                 Staffinc
               </a>
               , where I architect the Ventura UI design system, lead 2 FE
-              engineers, coordinate cross-functional squads, and drive frontend
-              standards across the organization.
+              engineers, coordinate cross-functional squads (FE, backend, QA,
+              mobile), and drive frontend standards across the organization.
             </p>
             <p>
               I thrive at the intersection of engineering leadership and

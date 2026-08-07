@@ -5,7 +5,8 @@ import { CaseStudyLayout } from "@/components/layout/case-study-layout";
 export const metadata: Metadata = {
   description:
     "Refactored legacy code and cut build time by 60% to unblock framework upgrades at Staffinc.",
-  title: "Next.js 10 → 11 Migration — Raka Pratama",
+  title:
+    "Next.js Migration — 60% Faster Builds with TypeScript & Code Standards",
 };
 
 export default function NextjsMigrationPage() {

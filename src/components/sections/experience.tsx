@@ -34,6 +34,14 @@ const EXPERIENCE: Role[] = [
     title: "Chapter Lead",
   },
   {
+    company: "Tribe Fintech",
+    description:
+      "Built AI-powered tools for SME financial management using the OpenAI and Travily APIs — opening a new business channel for the platform. Refactored legacy code to domain-driven design and established coding rules that made a messy codebase navigable and maintainable.",
+    period: "2023 — 2025",
+    tags: ["React", "Node.js", "OpenAI API", "REST APIs", "DDD", "TDD"],
+    title: "Software Engineer (Part-time)",
+  },
+  {
     company: "Staffinc",
     companyUrl: "https://staffinc.co",
     description:
@@ -53,7 +61,7 @@ const EXPERIENCE: Role[] = [
   {
     company: "Smooets Technology",
     description:
-      "Mentored 3 fresh graduate developers to productivity in 3 months while leading 3 teams across 4 front-end and back-end projects. One mentee now works as a direct report.",
+      "Mentored 3 fresh graduate developers to productivity in 3 months while leading 3 teams across 4 front-end and back-end projects using Angular, React, and Node.js — spanning UI and API work end-to-end. One mentee now works as a direct report.",
     period: "2019 — 2020",
     tags: ["Angular", "React", "Node.js", "Mentoring", "Team Leadership"],
     title: "Technical Leader",

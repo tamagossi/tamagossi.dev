@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   MigrationVisual,
   TeamVisual,
+  TribeVisual,
   VenturaVisual,
 } from "@/components/ui/case-visuals";
 import { FadeIn } from "@/components/ui/reveal";
@@ -15,7 +16,7 @@ const STUDIES = [
     category: "design system",
     href: "/case-studies/ventura-ui",
     summary:
-      "How I architected a 12-engineer component library across 3 product squads — from tokens to adoption.",
+      "How I architected a design system adopted across 3 product squads — from tokens to adoption.",
     title: "Ventura UI Design System",
     Visual: VenturaVisual,
   },
@@ -34,6 +35,14 @@ const STUDIES = [
       "Code review norms, testing culture, and mentoring that measurably improved delivery and team health.",
     title: "FE Team Restructuring",
     Visual: TeamVisual,
+  },
+  {
+    category: "api & ai",
+    href: "/case-studies/tribe-ai-tools",
+    summary:
+      "Designed AI-powered tools on the OpenAI and Travily APIs — and refactored a legacy fintech codebase into domain-driven architecture.",
+    title: "AI Tools for SME Finance",
+    Visual: TribeVisual,
   },
 ];
 
