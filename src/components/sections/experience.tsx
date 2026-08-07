@@ -34,6 +34,14 @@ const EXPERIENCE: Role[] = [
     title: "Chapter Lead",
   },
   {
+    company: "Edulab Indonesia",
+    description:
+      "Optimized website performance by reducing network calls from 3-5 per page to 1-2. Created consistent design system and refactored codebase for better maintainability at Indonesia's leading education consulting company with 30+ branches.",
+    period: "2025 — 2026",
+    tags: ["React", "Performance", "Design Systems"],
+    title: "Front-End Engineer (Part-time)",
+  },
+  {
     company: "Tribe Fintech",
     description:
       "Built AI-powered tools for SME financial management using the OpenAI and Travily APIs — opening a new business channel for the platform. Refactored legacy code to domain-driven design and established coding rules that made a messy codebase navigable and maintainable.",
@@ -49,14 +57,6 @@ const EXPERIENCE: Role[] = [
     period: "2020 — 2024",
     tags: ["React", "TypeScript", "Monorepo", "DDD", "TDD", "Design Systems"],
     title: "Front-End Software Engineer",
-  },
-  {
-    company: "Edulab Indonesia",
-    description:
-      "Optimized website performance by reducing network calls from 3-5 per page to 1-2. Created consistent design system and refactored codebase for better maintainability at Indonesia's leading education consulting company with 30+ branches.",
-    period: "2025 — 2026",
-    tags: ["React", "Performance", "Design Systems"],
-    title: "Front-End Engineer (Part-time)",
   },
   {
     company: "Smooets Technology",

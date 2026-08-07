@@ -1,8 +1,8 @@
 import { Header } from "@/components/layout/header";
 import { About } from "@/components/sections/about";
+import { Blog } from "@/components/sections/blog";
 import { CaseStudies } from "@/components/sections/case-studies";
 import { Contact } from "@/components/sections/contact";
-import { Demo } from "@/components/sections/demo";
 import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
 import { Skills } from "@/components/sections/skills";
@@ -18,7 +18,7 @@ export default function Home() {
         <Experience />
         <Skills />
         <CaseStudies />
-        <Demo />
+        <Blog />
         <Contact />
       </main>
 
