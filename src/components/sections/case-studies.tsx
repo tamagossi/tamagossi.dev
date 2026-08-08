@@ -24,8 +24,8 @@ const STUDIES = [
     category: "platform migration",
     href: "/case-studies/nextjs-migration",
     summary:
-      "Refactored legacy code, cut build time by 60%, and unblocked framework upgrades with an incremental strategy.",
-    title: "Next.js 10 → 11 Migration",
+      "Untangled an antd v3 dependency chain to take a client portal from Next.js 10 to 12 — cutting builds from 20+ minutes to under 10.",
+    title: "Next.js Migration",
     Visual: MigrationVisual,
   },
   {

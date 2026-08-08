@@ -71,3 +71,23 @@ Import groups are sorted by `@ianvs/prettier-plugin-sort-imports` in this order:
 - Next.js 16 (App Router), static export (`output: "export"`).
 - Tailwind CSS v4 (CSS-first config in `src/app/globals.css`).
 - Path alias: `@/*` → `./src/*`.
+
+## Verification & gotchas
+
+- **No test suite.** `package.json` has no `test` script. Type errors surface
+  only in `npm run build` (there is no separate typecheck script) — always
+  build after changing code, not just lint.
+- **Static export** (`output: "export"` in `next.config.ts`): `npm run start`
+  will not work. Preview a build with `npx serve out`.
+- **`images: { unoptimized: true }`** — no image optimization; `next/image` is
+  a pass-through. Don't assume build-time image processing.
+
+## Content notes
+
+- **Blog is placeholder.** Posts are hardcoded sample data in
+  `src/lib/posts.ts`. `@mdx-js` + `@next/mdx` deps are installed but unused —
+  no `.mdx` files exist. Don't look for a content pipeline.
+- **Case-study source material lives in `.agents/docs/`.** Pages under
+  `src/app/case-studies/` are written from planning docs there (e.g.
+  `Next Upgrade Plan …md` → `nextjs-migration`). Treat those docs as the source
+  of truth for case-study content.
