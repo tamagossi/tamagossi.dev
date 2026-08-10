@@ -16,7 +16,7 @@ const STUDIES = [
     category: "design system",
     href: "/case-studies/ventura-ui",
     summary:
-      "How I architected a design system adopted across 3 product squads — from tokens to adoption.",
+      "How I proposed and led a 91-component design system, shipped inside a legacy monolith — from Stitches tokens to defined component behavior.",
     title: "Ventura UI Design System",
     Visual: VenturaVisual,
   },
