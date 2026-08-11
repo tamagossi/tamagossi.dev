@@ -28,7 +28,7 @@ export default function Home() {
             Designed &amp; built by Raka Pratama
           </p>
           <p className="text-faint font-mono text-xs">
-            Next.js · Tailwind CSS · Framer Motion · Vercel
+            Next.js · Tailwind CSS · Framer Motion
           </p>
         </div>
       </footer>
