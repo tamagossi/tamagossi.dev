@@ -22,7 +22,7 @@ export function FadeIn({
   children,
   className,
   delay = 0,
-  once = true,
+  once = false,
   y = 24,
 }: FadeInProps) {
   const disabled = useAnimationsDisabled();
@@ -59,7 +59,7 @@ export function SlideIn({
       className={className}
       initial={disabled ? false : { opacity: 0, x }}
       transition={{ delay, duration: 0.9, ease: EASE }}
-      viewport={{ margin: "-80px", once: true }}
+      viewport={{ margin: "-80px", once: false }}
       whileInView={disabled ? undefined : { opacity: 1, x: 0 }}
     >
       {children}
@@ -81,7 +81,7 @@ export function ScaleIn({ children, className, delay = 0 }: ScaleInProps) {
       className={className}
       initial={disabled ? false : { opacity: 0, scale: 0.97 }}
       transition={{ delay, duration: 0.8, ease: EASE }}
-      viewport={{ margin: "-80px", once: true }}
+      viewport={{ margin: "-80px", once: false }}
       whileInView={disabled ? undefined : { opacity: 1, scale: 1 }}
     >
       {children}
@@ -117,7 +117,7 @@ export function WordReveal({
             className="inline-block"
             initial={disabled ? false : { y: "115%" }}
             transition={{ delay: delay + i * 0.05, duration: 0.65, ease: EASE }}
-            viewport={{ margin: "-60px", once: true }}
+            viewport={{ margin: "-60px", once: false }}
             whileInView={disabled ? undefined : { y: "0%" }}
           >
             {word}
