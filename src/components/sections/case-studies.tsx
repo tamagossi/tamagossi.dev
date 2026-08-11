@@ -32,7 +32,7 @@ const STUDIES = [
     category: "team & process",
     href: "/case-studies/team-restructuring",
     summary:
-      "Code review norms, testing culture, and mentoring that measurably improved delivery and team health.",
+      "From a lost Chapter Lead to a structured one — a Notion dashboard, commit standards, and AI-powered PR tooling that rebuilt trust and got initiatives shipped.",
     title: "FE Team Restructuring",
     Visual: TeamVisual,
   },

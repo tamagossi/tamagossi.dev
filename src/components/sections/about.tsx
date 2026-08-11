@@ -60,7 +60,7 @@ export const About = () => {
               hands-on architecture — setting technical direction, mentoring
               engineers, and still writing production code. My work spans design
               systems, Next.js platform migrations, and team restructuring that
-              measurably improved delivery quality.
+              rebuilt trust and delivery discipline.
             </p>
             <p>
               Associate Degree (D3) in Informatics — with 7+ years of
