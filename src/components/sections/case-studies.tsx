@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   MigrationVisual,
   TeamVisual,
-  TribeVisual,
   VenturaVisual,
 } from "@/components/ui/case-visuals";
 import { FadeIn } from "@/components/ui/reveal";
@@ -35,14 +34,6 @@ const STUDIES = [
       "From a lost Chapter Lead to a structured one — a Notion dashboard, commit standards, and AI-powered PR tooling that rebuilt trust and got initiatives shipped.",
     title: "FE Team Restructuring",
     Visual: TeamVisual,
-  },
-  {
-    category: "api & ai",
-    href: "/case-studies/tribe-ai-tools",
-    summary:
-      "Designed AI-powered tools on the OpenAI and Travily APIs — and refactored a legacy fintech codebase into domain-driven architecture.",
-    title: "AI Tools for SME Finance",
-    Visual: TribeVisual,
   },
 ];
 

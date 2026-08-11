@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/case-studies/ventura-ui", priority: 0.8 },
     { path: "/case-studies/nextjs-migration", priority: 0.8 },
     { path: "/case-studies/team-restructuring", priority: 0.8 },
-    { path: "/case-studies/tribe-ai-tools", priority: 0.8 },
   ];
 
   return routes.map((route) => ({
