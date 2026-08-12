@@ -23,7 +23,7 @@ const TOKENS = [
 const STATS = [
   { label: "years shipping product UI", value: "7+" },
   { label: "FE engineers led as Chapter Lead", value: "2" },
-  { label: "design system components", value: "40+" },
+  { label: "design system components", value: "91" },
   { label: "faster CI builds", value: "60%" },
 ];
 
@@ -52,7 +52,7 @@ export const About = () => {
                 Staffinc
               </a>
               , where I architect the Ventura UI design system, lead 2 FE
-              engineers, coordinate cross-functional squads (FE, backend, QA,
+              engineers, coordinate a cross-functional squad (FE, backend, QA,
               mobile), and drive frontend standards across the organization.
             </p>
             <p>

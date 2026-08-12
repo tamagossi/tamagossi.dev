@@ -14,8 +14,8 @@ export default function TeamRestructuringPage() {
     <CaseStudyLayout>
       <h1 className="mb-2">From Lost Chapter Lead to a Better One Every Day</h1>
       <p className="mb-8">
-        Chapter Lead · 2 FE engineers, cross-functional squads · Staffinc ·
-        Early 2025 – Present
+        Chapter Lead · 2 FE engineers, cross-functional squad · Staffinc · Early
+        2025 – Present
       </p>
 
       <h2 className="mt-10">The Problem</h2>

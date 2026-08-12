@@ -21,7 +21,7 @@ const EXPERIENCE: Role[] = [
     company: "Staffinc",
     companyUrl: "https://staffinc.co",
     description:
-      "Lead 2 frontend engineers as Chapter Lead. As squad lead, coordinate cross-functional teams of 1 FE, 2 BE, 2 QA, and 1–2 mobile engineers per sprint. Architected Ventura UI design system, drove Next.js migration, introduced code review and testing standards that cut bug rates from 100%+ to 70% and reduced build time by 60%.",
+      "Lead 2 frontend engineers as Chapter Lead. As squad lead, coordinate a cross-functional team of 1 FE, 2 BE, 2 QA, and 1–2 mobile engineers per sprint — and act as interim tech lead, designing system architecture beyond the frontend. Architected Ventura UI design system, drove Next.js migration, introduced code review and testing standards that cut bugs during development and rebuilt shipping confidence, and reduced build time by 60%.",
     period: "2024 — PRESENT",
     tags: [
       "React",
@@ -53,7 +53,7 @@ const EXPERIENCE: Role[] = [
     company: "Staffinc",
     companyUrl: "https://staffinc.co",
     description:
-      "Created design system and monorepo architecture for recruitment and admin portals. Achieved 72% test coverage from scratch. Migrated Client Portal from atomic design to domain-driven design, reducing unoptimized code and enabling faster hot reload.",
+      "Created design system and monorepo architecture for recruitment and admin portals. Raised unit-test coverage from below 50% to a stable ~70% in a legacy codebase by making tests part of every change. Migrated Client Portal from atomic design to domain-driven design, reducing unoptimized code and enabling faster hot reload.",
     period: "2020 — 2024",
     tags: ["React", "TypeScript", "Monorepo", "DDD", "TDD", "Design Systems"],
     title: "Front-End Software Engineer",
