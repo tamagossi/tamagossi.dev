@@ -84,9 +84,13 @@ Import groups are sorted by `@ianvs/prettier-plugin-sort-imports` in this order:
 
 ## Content notes
 
-- **Blog is placeholder.** Posts are hardcoded sample data in
-  `src/lib/posts.ts`. `@mdx-js` + `@next/mdx` deps are installed but unused —
-  no `.mdx` files exist. Don't look for a content pipeline.
+- **Blog posts are MDX** in `src/posts/*.mdx` (compiled via `@next/mdx`
+  `createMDX` in `next.config.ts`). Each post exports `metadata`
+  (date/excerpt/tags/title — NOT YAML frontmatter) and renders its body as the
+  default export. The typed registry `src/lib/posts.ts` statically imports all
+  posts; add a post = one `.mdx` file + one registry entry. Detail page:
+  `src/app/blog/[slug]/page.tsx` (`generateStaticParams`, `dynamicParams =
+false`). Global MDX element styling lives in `src/mdx-components.tsx`.
 - **Case-study source material lives in `.agents/docs/`.** Pages under
   `src/app/case-studies/` are written from planning docs there (e.g.
   `Next Upgrade Plan …md` → `nextjs-migration`). Treat those docs as the source

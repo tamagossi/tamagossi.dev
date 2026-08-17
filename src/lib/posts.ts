@@ -1,31 +1,32 @@
-export interface Post {
+import type { ComponentType } from "react";
+
+import HelloWorld, {
+  metadata as helloWorldMeta,
+} from "@/posts/hello-world.mdx";
+
+export interface PostMeta {
   date: string;
   excerpt: string;
   tags: string[];
   title: string;
 }
 
-// Sample posts — replace with real writing when ready.
+export interface Post extends PostMeta {
+  Content: ComponentType;
+  slug: string;
+}
+
 export const posts: Post[] = [
   {
-    date: "2026-07-20",
-    excerpt:
-      "A design system is never finished — it ships, gets adopted, and evolves with the product. Lessons from running Ventura UI across 3 squads.",
-    tags: ["Design Systems", "Frontend"],
-    title: "Design Systems Are a Product, Not a Project",
-  },
-  {
-    date: "2026-06-12",
-    excerpt:
-      "You don't need an ML team to ship AI features. What it actually takes: disciplined API integration, error handling, and product thinking.",
-    tags: ["AI", "Node.js", "APIs"],
-    title: "Shipping AI Features Without an ML Team",
-  },
-  {
-    date: "2026-05-03",
-    excerpt:
-      "Moving a client portal from atomic design to domain-driven design — what changed, what broke, and why the codebase got easier to navigate.",
-    tags: ["DDD", "React", "Architecture"],
-    title: "From Atomic Design to DDD: A Migration Story",
+    Content: HelloWorld,
+    date: helloWorldMeta.date,
+    excerpt: helloWorldMeta.excerpt,
+    slug: "hello-world",
+    tags: helloWorldMeta.tags,
+    title: helloWorldMeta.title,
   },
 ];
+
+export function getPostBySlug(slug: string): Post | undefined {
+  return posts.find((post) => post.slug === slug);
+}
